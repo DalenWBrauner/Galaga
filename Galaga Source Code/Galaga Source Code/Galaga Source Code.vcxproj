@@ -68,6 +68,7 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
+    <ReferencePath>$(VC_ReferencesPath_x86);$(ProjectDir);</ReferencePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug Static|Win32'">
     <LinkIncremental>true</LinkIncremental>

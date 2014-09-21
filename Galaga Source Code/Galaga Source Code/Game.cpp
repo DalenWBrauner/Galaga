@@ -47,15 +47,19 @@ Galaga::Galaga()
 	, mTexture()
 	, mPlayer() {
 
-	if (!mTexture.loadFromFile("../../Media/01_Ship.png")) {
-		// I'm unsure how to handle this at the moment...
+	// Loads the entire sprite sheet
+	if (!mTexture.loadFromFile("../../Media/Sprite Sheet.png")) {
+		// Error handling
 	}
+	// Sets the player to just the ship
+	mPlayer.setTexture(mTexture);
+	mPlayer.setTextureRect(sf::IntRect(184, 55, 15, 16));
 
 	// Constants set at game instantiation
-	mPlayer.setTexture(mTexture);
 	mPlayer.setPosition(300.f, 666.f);
-	PlayerSpeed = 164.f;
+	PlayerSpeed = 200.f;
 	TimePerFrame = sf::seconds(1.f / 60.f);
+
 	// Variables
 	mIsMovingLeft = false;
 	mIsMovingRight = false;
