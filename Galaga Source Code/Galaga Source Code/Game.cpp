@@ -16,10 +16,10 @@ private:
 	// Class Vars
 	sf::RenderWindow mWindow;
 	sf::CircleShape mPlayer;
+	sf::Time TimePerFrame;
+	float PlayerSpeed;
 	bool mIsMovingLeft;
 	bool mIsMovingRight;
-	float PlayerSpeed;
-	sf::Time TimePerFrame;
 
 	// Class Methods
 	void handlePlayerInput(sf::Keyboard::Key, bool);
