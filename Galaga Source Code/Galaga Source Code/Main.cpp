@@ -16,7 +16,11 @@ private:
 	// Class Vars
 	sf::RenderWindow mWindow;
 	sf::CircleShape mPlayer;
+	bool mIsMovingLeft;
+	bool mIsMovingRight;
+
 	// Class Methods
+	void handlePlayerInput(sf::Keyboard::Key, bool);
 	void processEvents();
 	void update();
 	void render();
@@ -24,6 +28,7 @@ private:
 public:
 	// Constructors
 	Galaga();
+
 	// Usage Methods
 	void run();
 
@@ -33,36 +38,65 @@ Galaga::Galaga(): mWindow(sf::VideoMode(640, 640), "GALAGA"), mPlayer() {
 	mPlayer.setRadius(6.f);
 	mPlayer.setPosition(320.f, 320.f);
 	mPlayer.setFillColor(sf::Color::Green);
+	mIsMovingLeft = false;
+	mIsMovingRight = false;
 }
 
-void Galaga::run() {
-//	Causes the game to start!
-	while (mWindow.isOpen()) {
-		processEvents();
-		update();
-		render();
+void Galaga::handlePlayerInput(sf::Keyboard::Key key, bool isPressed) {
+	// Controls the game based on user input.
+	switch (key) {
+	case sf::Keyboard::Left:
+		mIsMovingLeft = isPressed;
+		break;
+	case sf::Keyboard::Right:
+		mIsMovingRight = isPressed;
+		break;
 	}
 }
 
 void Galaga::processEvents() {
-//	Handles user input.
+	//	Accepts user input.
 	sf::Event event;
 	while (mWindow.pollEvent(event)) {
-		if (event.type == sf::Event::Closed) {
+		switch (event.type) {
+		case sf::Event::KeyPressed:
+			handlePlayerInput(event.key.code, true);
+			break;
+		case sf::Event::KeyReleased:
+			handlePlayerInput(event.key.code, false);
+			break;
+		case sf::Event::Closed:
 			mWindow.close();
+			break;
 		}
 	}
 }
 
 void Galaga::update() {
-//	"Updates the game logic, that is, everything that happens in the game."
+	// Manipulates the game logic at each 'tick'
+	sf::Vector2f movement(0.f, 0.f);
+	if (mIsMovingLeft)
+		movement.x -= 1.f;
+	if (mIsMovingRight)
+		movement.x += 1.f;
+
+	mPlayer.move(movement);
 }
 
 void Galaga::render() {
-//	Draws everything a user will see to the screen.
+	// Draws everything a user will see to the screen.
 	mWindow.clear();
 	mWindow.draw(mPlayer);
 	mWindow.display();
+}
+
+void Galaga::run() {
+	// Causes the game to start!
+	while (mWindow.isOpen()) {
+		processEvents();
+		update();
+		render();
+	}
 }
 
 int main() {
