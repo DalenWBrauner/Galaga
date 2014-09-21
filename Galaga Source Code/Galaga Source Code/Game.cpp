@@ -13,10 +13,15 @@
 class Galaga {
 
 private:
-	// Class Vars
+	// Mechanics
 	sf::RenderWindow mWindow;
-	sf::CircleShape mPlayer;
 	sf::Time TimePerFrame;
+
+	// Images
+	sf::Texture mTexture;
+	sf::Sprite mPlayer;
+
+	// Motion
 	float PlayerSpeed;
 	bool mIsMovingLeft;
 	bool mIsMovingRight;
@@ -36,11 +41,19 @@ public:
 
 };
 
-Galaga::Galaga(): mWindow(sf::VideoMode(600, 800), "GALAGA"), mPlayer() {
+Galaga::Galaga()
+	: mWindow(sf::VideoMode(600, 800)
+	, "GALAGA")
+	, mTexture()
+	, mPlayer() {
+
+	if (!mTexture.loadFromFile("../../Media/01_Ship.png")) {
+		// I'm unsure how to handle this at the moment...
+	}
+
 	// Constants set at game instantiation
-	mPlayer.setRadius(10.f);
+	mPlayer.setTexture(mTexture);
 	mPlayer.setPosition(300.f, 666.f);
-	mPlayer.setFillColor(sf::Color::Green);
 	PlayerSpeed = 164.f;
 	TimePerFrame = sf::seconds(1.f / 60.f);
 	// Variables
