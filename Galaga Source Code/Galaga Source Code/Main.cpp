@@ -10,33 +10,63 @@
 
 #include <SFML/Graphics.hpp>
 
-int main()
-{
-	sf::RenderWindow window(sf::VideoMode(640, 640), "GALAGA");
-	sf::CircleShape circle_1;
-	circle_1.setRadius(6.f);
-	circle_1.setPosition(320.f, 320.f);
-	circle_1.setFillColor(sf::Color::Green);
+class Galaga {
 
-	sf::CircleShape circle_2;
-	circle_2.setRadius(64.f);
-	circle_2.setPosition(100.f, 100.f);
-	circle_2.setFillColor(sf::Color::Green);
+private:
+	// Class Vars
+	sf::RenderWindow mWindow;
+	sf::CircleShape mPlayer;
+	// Class Methods
+	void processEvents();
+	void update();
+	void render();
 
-	while (window.isOpen())
-	{
-		sf::Event event;
-		while (window.pollEvent(event))
-		{
-			if (event.type == sf::Event::Closed)
-				window.close();
-		}
+public:
+	// Constructors
+	Galaga();
+	// Usage Methods
+	void run();
 
-		window.clear();
-		window.draw(circle_1);
-		window.draw(circle_2);
-		window.display();
+};
+
+Galaga::Galaga(): mWindow(sf::VideoMode(640, 640), "GALAGA"), mPlayer() {
+	mPlayer.setRadius(6.f);
+	mPlayer.setPosition(320.f, 320.f);
+	mPlayer.setFillColor(sf::Color::Green);
+}
+
+void Galaga::run() {
+//	Causes the game to start!
+	while (mWindow.isOpen()) {
+		processEvents();
+		update();
+		render();
 	}
+}
 
-	//return 0;
+void Galaga::processEvents() {
+//	Handles user input.
+	sf::Event event;
+	while (mWindow.pollEvent(event)) {
+		if (event.type == sf::Event::Closed) {
+			mWindow.close();
+		}
+	}
+}
+
+void Galaga::update() {
+//	"Updates the game logic, that is, everything that happens in the game."
+}
+
+void Galaga::render() {
+//	Draws everything a user will see to the screen.
+	mWindow.clear();
+	mWindow.draw(mPlayer);
+	mWindow.display();
+}
+
+int main() {
+	Galaga the_game;
+	the_game.run();
+	return 0;
 }
