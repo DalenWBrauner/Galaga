@@ -18,11 +18,13 @@ private:
 	sf::CircleShape mPlayer;
 	bool mIsMovingLeft;
 	bool mIsMovingRight;
+	float PlayerSpeed;
+	sf::Time TimePerFrame;
 
 	// Class Methods
 	void handlePlayerInput(sf::Keyboard::Key, bool);
 	void processEvents();
-	void update();
+	void update(sf::Time);
 	void render();
 
 public:
@@ -34,10 +36,14 @@ public:
 
 };
 
-Galaga::Galaga(): mWindow(sf::VideoMode(640, 640), "GALAGA"), mPlayer() {
-	mPlayer.setRadius(6.f);
-	mPlayer.setPosition(320.f, 320.f);
+Galaga::Galaga(): mWindow(sf::VideoMode(600, 800), "GALAGA"), mPlayer() {
+	// Constants set at game instantiation
+	mPlayer.setRadius(10.f);
+	mPlayer.setPosition(300.f, 666.f);
 	mPlayer.setFillColor(sf::Color::Green);
+	PlayerSpeed = 164.f;
+	TimePerFrame = sf::seconds(1.f / 60.f);
+	// Variables
 	mIsMovingLeft = false;
 	mIsMovingRight = false;
 }
@@ -72,15 +78,15 @@ void Galaga::processEvents() {
 	}
 }
 
-void Galaga::update() {
+void Galaga::update(sf::Time deltaTime) {
 	// Manipulates the game logic at each 'tick'
 	sf::Vector2f movement(0.f, 0.f);
 	if (mIsMovingLeft)
-		movement.x -= 1.f;
+		movement.x -= PlayerSpeed;
 	if (mIsMovingRight)
-		movement.x += 1.f;
+		movement.x += PlayerSpeed;
 
-	mPlayer.move(movement);
+	mPlayer.move(movement * deltaTime.asSeconds());
 }
 
 void Galaga::render() {
@@ -92,9 +98,27 @@ void Galaga::render() {
 
 void Galaga::run() {
 	// Causes the game to start!
+
+	// Synchronizes our time-step clocks
+	sf::Clock clock;
+	sf::Time timeSinceLastUpdate = sf::Time::Zero;
+
+	// While our game is running...
 	while (mWindow.isOpen()) {
 		processEvents();
-		update();
+
+		// Grab how much time has passed since our last time-step
+		timeSinceLastUpdate += clock.restart();
+		// Run the appropriate number of time-steps that ought to have passed
+		while (timeSinceLastUpdate > TimePerFrame) {
+			timeSinceLastUpdate -= TimePerFrame;
+
+			// update() and processEvents() within each individual time step
+			processEvents();
+			update(TimePerFrame);
+		}
+
+		// Render only after we've caught up
 		render();
 	}
 }
