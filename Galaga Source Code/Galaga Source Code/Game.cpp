@@ -47,13 +47,14 @@ Galaga::Galaga()
 	, mTexture()
 	, mPlayer() {
 
-	// Loads the entire sprite sheet
+	// Loads the sprite sheet
 	if (!mTexture.loadFromFile("../../Media/Sprite Sheet.png")) {
 		// Error handling
 	}
-	// Sets the player to just the ship
+	// Sets the player to the ship sprite
 	mPlayer.setTexture(mTexture);
-	mPlayer.setTextureRect(sf::IntRect(184, 55, 15, 16));
+	mPlayer.setTextureRect(sf::IntRect(120, 1, 16, 16));
+	mPlayer.setScale(sf::Vector2f(2.f, 2.f));
 
 	// Constants set at game instantiation
 	mPlayer.setPosition(300.f, 666.f);

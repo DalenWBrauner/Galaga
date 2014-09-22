@@ -1,0 +1,9 @@
+Tile's position on the grid:	 1	 2	 3	 4	 5	 6	  7	  8	  9	 10	 11	 12
+Tile's y position in pixels:	01	18	35	52	69	86	103	120	137	154	171	188
+
+Tractor Beam:		(137,1), (137,82), (137,163)
+Player Explosion:	(1,238) > (35,238) > (69,238) > (103,238)
+Enemy  Explosion:	(103,205) > (86,205) > (69,205) > (35,205) > (1,205)
+
+Player Bullets:		V:(146,244) D:(146, 253) H:(146,262)
+Enemy  Bullets:		V:(137,244) D:(137, 253) H:(137,262)
