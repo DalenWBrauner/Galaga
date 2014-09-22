@@ -8,6 +8,7 @@
 #endif // SFML_STATIC
 
 #include <SFML/Graphics.hpp>
+//#include <SFML/Audio.hpp>
 
 class Galaga {
 
@@ -19,6 +20,10 @@ private:
 	// Images
 	sf::Texture mTexture;
 	sf::Sprite mPlayer;
+
+	// Audio
+//	sf::SoundBuffer sbfCoin;
+//	sf::Sound sfxCoin;
 
 	// Motion
 	float PlayerSpeed;
