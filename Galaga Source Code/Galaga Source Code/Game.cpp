@@ -31,6 +31,7 @@ private:
 	void processEvents();
 	void update(sf::Time);
 	void render();
+	void loadAssets();
 
 public:
 	// Constructors
@@ -47,10 +48,8 @@ Galaga::Galaga()
 	, mTexture()
 	, mPlayer() {
 
-	// Loads the sprite sheet
-	if (!mTexture.loadFromFile("../../Media/Sprite Sheet.png")) {
-		// Error handling
-	}
+	loadAssets();
+
 	// Sets the player to the ship sprite
 	mPlayer.setTexture(mTexture);
 	mPlayer.setTextureRect(sf::IntRect(120, 1, 16, 16));
@@ -64,6 +63,13 @@ Galaga::Galaga()
 	// Variables
 	mIsMovingLeft = false;
 	mIsMovingRight = false;
+}
+
+void Galaga::loadAssets() {
+	// Loads the sprite sheet
+	if (!mTexture.loadFromFile(			"../../Media/Sprite Sheet.png"))		{
+		// Handle Errors
+	}
 }
 
 void Galaga::handlePlayerInput(sf::Keyboard::Key key, bool isPressed) {
