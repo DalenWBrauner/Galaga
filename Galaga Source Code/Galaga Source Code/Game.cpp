@@ -7,7 +7,6 @@
 #pragma comment(lib, "gdi32.lib")  
 #endif // SFML_STATIC
 
-
 #include <SFML/Graphics.hpp>
 
 class Galaga {
@@ -43,10 +42,10 @@ public:
 };
 
 Galaga::Galaga()
-	: mWindow(sf::VideoMode(600, 800)
-	, "GALAGA")
+	: mWindow(sf::VideoMode(600, 800), "GALAGA")
 	, mTexture()
-	, mPlayer() {
+	, mPlayer()
+	{
 
 	loadAssets();
 
@@ -68,7 +67,7 @@ Galaga::Galaga()
 void Galaga::loadAssets() {
 	// Loads the sprite sheet
 	if (!mTexture.loadFromFile(			"../../Media/Sprite Sheet.png"))		{
-		// Handle Errors
+		throw std::runtime_error("Failed to load sprite sheet.");
 	}
 }
 
@@ -150,5 +149,4 @@ void Galaga::run() {
 int main() {
 	Galaga the_game;
 	the_game.run();
-	return 0;
 }
