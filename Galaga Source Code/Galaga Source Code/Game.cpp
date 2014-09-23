@@ -8,7 +8,7 @@
 #endif // SFML_STATIC
 
 #include <SFML/Graphics.hpp>
-//#include <SFML/Audio.hpp>
+#include <SFML/Audio.hpp>
 
 class Galaga {
 
@@ -22,8 +22,20 @@ private:
 	sf::Sprite mPlayer;
 
 	// Audio
-//	sf::SoundBuffer sbfCoin;
-//	sf::Sound sfxCoin;
+	sf::SoundBuffer sbfCoin;
+	sf::SoundBuffer sbfCaptured;
+	sf::SoundBuffer sbfFiring;
+	sf::SoundBuffer sbfIncoming;
+	sf::SoundBuffer sbfDestroyed;
+	sf::SoundBuffer sbfStart;
+	sf::SoundBuffer sbfIntro;
+	sf::Sound sfxCoin;
+	sf::Sound sfxCaptured;
+	sf::Sound sfxFiring;
+	sf::Sound sfxIncoming;
+	sf::Sound sfxDestroyed;
+	sf::Sound sfxStart;
+	sf::Sound sfxIntro;
 
 	// Motion
 	float PlayerSpeed;
@@ -67,13 +79,43 @@ Galaga::Galaga()
 	// Variables
 	mIsMovingLeft = false;
 	mIsMovingRight = false;
+
+	// Setup SFX
+	sfxCoin.setBuffer(sbfCoin);
+	sfxCaptured.setBuffer(sbfCaptured);
+	sfxFiring.setBuffer(sbfFiring);
+	sfxIncoming.setBuffer(sbfIncoming);
+	sfxDestroyed.setBuffer(sbfDestroyed);
+	sfxStart.setBuffer(sbfStart);
+	sfxIntro.setBuffer(sbfIntro);
 }
 
 void Galaga::loadAssets() {
 	// Loads the sprite sheet
-	if (!mTexture.loadFromFile(			"../../Media/Sprite Sheet.png"))		{
+	if (!mTexture.loadFromFile("../../Media/Sprite Sheet.png"))
 		throw std::runtime_error("Failed to load sprite sheet.");
-	}
+
+	if (!sbfCoin.loadFromFile("../../Media/Coin.wav"))
+		throw std::runtime_error("Failed to load coin.wav.");
+
+	if (!sbfCaptured.loadFromFile("../../Media/Fighter_Captured.wav"))
+		throw std::runtime_error("Failed to load coin.wav.");
+
+	if (!sbfFiring.loadFromFile("../../Media/Firing.wav"))
+		throw std::runtime_error("Failed to load coin.wav.");
+
+	if (!sbfIncoming.loadFromFile("../../Media/Flying_Enemy.wav"))
+		throw std::runtime_error("Failed to load coin.wav.");
+
+	if (!sbfDestroyed.loadFromFile("../../Media/Kill_Enemy.wav"))
+		throw std::runtime_error("Failed to load coin.wav.");
+
+	if (!sbfStart.loadFromFile("../../Media/Level_Start.wav"))
+		throw std::runtime_error("Failed to load coin.wav.");
+
+	if (!sbfIntro.loadFromFile("../../Media/Theme_Song.wav"))
+		throw std::runtime_error("Failed to load coin.wav.");
+
 }
 
 void Galaga::handlePlayerInput(sf::Keyboard::Key key, bool isPressed) {
@@ -84,6 +126,27 @@ void Galaga::handlePlayerInput(sf::Keyboard::Key key, bool isPressed) {
 		break;
 	case sf::Keyboard::Right:
 		mIsMovingRight = isPressed;
+		break;
+	case sf::Keyboard::Q:
+		sfxIntro.play();
+		break;
+	case sf::Keyboard::W:
+		sfxStart.play();
+		break;
+	case sf::Keyboard::E:
+		sfxIncoming.play();
+		break;
+	case sf::Keyboard::R:
+		sfxFiring.play();
+		break;
+	case sf::Keyboard::T:
+		sfxDestroyed.play();
+		break;
+	case sf::Keyboard::Y:
+		sfxCoin.play();
+		break;
+	case sf::Keyboard::U:
+		sfxCaptured.play();
 		break;
 	}
 }
