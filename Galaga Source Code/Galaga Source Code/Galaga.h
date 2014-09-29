@@ -1,4 +1,3 @@
-#pragma comment
 #ifdef SFML_STATIC
 #pragma comment(lib, "glew.lib")
 #pragma comment(lib, "freetype.lib")
@@ -11,12 +10,19 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/Audio.hpp>
 
+#include <sstream>
+
 class Galaga {
 
 private:
 	// Mechanics
 	sf::RenderWindow mWindow;
 	sf::Time TimePerFrame;
+
+	// Text
+	sf::Font font;
+	sf::Text SFXText;
+	sf::Text scoreDisplay;
 
 	// Images
 	sf::Texture mTexture;
@@ -42,6 +48,10 @@ private:
 	float PlayerSpeed;
 	bool mIsMovingLeft;
 	bool mIsMovingRight;
+
+	// Other
+	int yourscore;
+	int highscore;
 
 	// Class Methods
 	void handlePlayerInput(sf::Keyboard::Key, bool);
