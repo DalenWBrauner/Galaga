@@ -15,6 +15,7 @@ Galaga::Galaga()
 
 	// Constants set at game instantiation
 	mPlayer.setPosition(250.f, 400.f);
+	mPlayer.setOrigin(8, 8);
 	PlayerSpeed = 200.f;
 	TimePerFrame = sf::seconds(1.f / 60.f);
 
@@ -37,14 +38,14 @@ Galaga::Galaga()
 	SFXText.setFont(font);
 	SFXText.setCharacterSize(15);
 	SFXText.setColor(sf::Color::White);
-	SFXText.setPosition(0, 50);
+	SFXText.setPosition(25, 50);
 	SFXText.setString("Q: Intro\nW: Start\nE: Incoming\nR: Firing\nT: Destroyed\nY: Coin\nU: Captured");
 
 	scoreDisplay.setFont(font);
 	scoreDisplay.setCharacterSize(15);
 	scoreDisplay.setColor(sf::Color::Red);
 	scoreDisplay.setPosition(400, 50);
-	scoreDisplay.setString("High\n Score\n\n\nYour\n Score");
+	scoreDisplay.setString("High\n Score\n\n\n\n1UP");
 }
 
 void Galaga::loadAssets() {
@@ -125,13 +126,19 @@ void Galaga::processEvents() {
 
 void Galaga::update(sf::Time deltaTime) {
 	// Manipulates the game logic at each 'tick'
+
+	// Player Movement
 	sf::Vector2f movement(0.f, 0.f);
 	if (mIsMovingLeft)
 		movement.x -= PlayerSpeed;
 	if (mIsMovingRight)
 		movement.x += PlayerSpeed;
-
 	mPlayer.move(movement * deltaTime.asSeconds());
+
+	// Camera Movement
+	//mWorldView.move(0.f, mScrollSpeed * dt.asSeconds());
+	
+	// Keeping Score
 //	std::stringstream scoreText;
 //	scoreText << "High\n Score\n" << highscore << "\nYour\n Score\n" << yourscore;
 //	scoreDisplay.setString(scoreText.str());
@@ -174,6 +181,11 @@ void Galaga::run() {
 }
 
 int main() {
-	Galaga the_game;
-	the_game.run();
+	try {
+		Galaga the_game;
+		the_game.run();
+	}
+	catch (std::exception& e) {
+		std::cout << "\nEXCEPTION: " << e.what() << std::endl;
+	}
 }

@@ -1,6 +1,6 @@
 #include "SceneNode.h"
-#include <SFML/Graphics.hpp>
-#include <assert.h>
+
+SceneNode::SceneNode() {}
 
 void SceneNode::update(sf::Time dt) {
 	updateCurrent(dt);

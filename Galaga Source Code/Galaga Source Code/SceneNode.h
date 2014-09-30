@@ -2,6 +2,7 @@
 #include <vector>
 #include <memory>
 #include <algorithm>
+#include <assert.h>				// used only in .cpp
 
 class SceneNode : public sf::Transformable, public sf::Drawable, private sf::NonCopyable {
 public:

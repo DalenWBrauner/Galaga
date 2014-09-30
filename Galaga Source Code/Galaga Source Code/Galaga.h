@@ -9,8 +9,8 @@
 
 #include <SFML/Graphics.hpp>
 #include <SFML/Audio.hpp>
-
 #include <sstream>
+#include <iostream>				// used only in .cpp
 
 class Galaga {
 

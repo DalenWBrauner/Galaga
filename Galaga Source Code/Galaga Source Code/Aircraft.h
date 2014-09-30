@@ -1,5 +1,5 @@
 #include "Entity.h"
-#include <SFML/Graphics.hpp>
+#include <SFML\Graphics.hpp>
 #include <memory>
 #include <map>
 
@@ -29,5 +29,5 @@ public:
 
 private:
 	EnemyType			mEnemyType;
-	sf::Sprite		mSprite;
+	sf::Sprite			mSprite;
 };
