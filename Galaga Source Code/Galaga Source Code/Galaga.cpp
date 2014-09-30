@@ -2,6 +2,7 @@
 
 Galaga::Galaga()
 	: mWindow(sf::VideoMode(512, 480), "GALAGA")
+	, mWorld(mWindow)
 	, mTexture()
 	, mPlayer()
 	{
@@ -147,6 +148,10 @@ void Galaga::update(sf::Time deltaTime) {
 void Galaga::render() {
 	// Draws everything a user will see to the screen.
 	mWindow.clear();
+
+	mWorld.draw();
+	mWindow.setView(mWindow.getDefaultView());
+
 	mWindow.draw(SFXText);
 	mWindow.draw(scoreDisplay);
 	mWindow.draw(mPlayer);

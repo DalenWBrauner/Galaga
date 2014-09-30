@@ -9,12 +9,16 @@
 
 #include <SFML/Graphics.hpp>
 #include <SFML/Audio.hpp>
+#include "World.h"
 #include <sstream>
 #include <iostream>				// used only in .cpp
 
 class Galaga {
 
 private:
+	// World
+	World mWorld;
+
 	// Mechanics
 	sf::RenderWindow mWindow;
 	sf::Time TimePerFrame;
