@@ -109,6 +109,6 @@ void World::buildScene() {
 
 	std::unique_ptr<Aircraft> rightEscort(
 		new Aircraft(Aircraft::RedShip, mTexturePtr, spriteMapPtr));
-	leftEscort->setPosition(80.f, 50.f);
+	rightEscort->setPosition(80.f, 50.f);
 	mPlayerAircraft->attachChild(std::move(rightEscort));
 }

@@ -5,8 +5,10 @@ Aircraft::Aircraft(EnemyType enemyType,
 	std::shared_ptr<std::map<EnemyType, int>> spriteMap
 	) {
 
+	mEnemyType = enemyType;
+
 	mSprite.setTexture(*mTexture);
-	mSprite.setTextureRect(sf::IntRect( (*spriteMap)[enemyType], 1, 16, 16));
+	mSprite.setTextureRect(sf::IntRect( (*spriteMap)[mEnemyType], 1, 16, 16));
 	mSprite.setScale(sf::Vector2f(2.f, 2.f));
 	mSprite.setOrigin(8, 8);
 }
