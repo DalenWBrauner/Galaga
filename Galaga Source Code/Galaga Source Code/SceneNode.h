@@ -1,8 +1,8 @@
-#include <SFML\Graphics.hpp>
+#include "Inclusion.h"
 #include <vector>
 #include <memory>
 #include <algorithm>
-#include <assert.h>				// used only in .cpp
+#include <assert.h>
 
 class SceneNode : public sf::Transformable, public sf::Drawable, private sf::NonCopyable {
 public:

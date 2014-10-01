@@ -6,12 +6,8 @@
 #pragma comment(lib, "winmm.lib")
 #pragma comment(lib, "gdi32.lib")  
 #endif // SFML_STATIC
-
-#include <SFML/Graphics.hpp>
-#include <SFML/Audio.hpp>
 #include "World.h"
 #include <sstream>
-#include <iostream>				// used only in .cpp
 
 class Galaga {
 

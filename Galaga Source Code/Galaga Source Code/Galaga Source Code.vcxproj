@@ -170,6 +170,7 @@
     <ClInclude Include="Galaga.h" />
     <ClInclude Include="Entity.h" />
     <ClInclude Include="Aircraft.h" />
+    <ClInclude Include="Inclusion.h" />
     <ClInclude Include="World.h" />
     <ClInclude Include="SceneNode.h" />
   </ItemGroup>

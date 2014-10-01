@@ -1,4 +1,3 @@
-#include <SFML\Graphics.hpp>
 #include "Aircraft.h"
 #include <array>
 
