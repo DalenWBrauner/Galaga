@@ -3,16 +3,21 @@
 World::World(sf::RenderWindow& window)
 	: mWindow(window)
 	, mWorldView(window.getDefaultView())
+	, mTexture()
+	, mSceneGraph()
+	, mSceneLayers()
 	, mWorldBounds(
 		0.f,					// left X position
 		0.f,					// top Y position
-		mWorldView.getSize().x,	// width
-		mWorldView.getSize().y	// height
+		512.f,					// width
+		480.f					// height
 	)
 	, mSpawnPosition(250.f, 400.f)	// This will become variable once I better understand boundaries
 	, mPlayerAircraft(nullptr)
-	, mTexture()
 {
+	//std::cout << mWorldView.getSize().x << std::endl;
+	//std::cout << mWorldView.getSize().y << std::endl;
+
 	loadTextures();
 	prepareSpriteMap();
 	buildScene();
@@ -22,15 +27,17 @@ World::World(sf::RenderWindow& window)
 	//	Equally wrong: our mWorldView's center should actually be the
 	//	center of the playing field, not the screen.
 	mWorldView.setCenter(256, 240);
+
+	std::cout << "AND THUS THE WORLD WAS BORN" << std::endl;
 }
 
 void World::update(sf::Time dt) {
+	//std::cout << "AND THUS THE WORLD WAS UPDATED" << std::endl;
 	//mWorldView.move(0.f, mScrollSpreed * dt.asSeconds());
 	sf::Vector2f position = mPlayerAircraft->getPosition();
 	sf::Vector2f velocity = mPlayerAircraft->getVelocity();
 
-	if (position.x <= mWorldBounds.left + 150 ||
-		position.x >= mWorldBounds.left + mWorldBounds.width - 150) {
+	if (position.x <= mWorldBounds.left || position.x >= mWorldBounds.width) {
 		velocity.x = -velocity.x;
 		mPlayerAircraft->setVelocity(velocity);
 	}
@@ -38,11 +45,13 @@ void World::update(sf::Time dt) {
 }
 
 void World::draw() {
+	std::cout << "AND THUS THE WORLD WAS DRAWN" << std::endl;
 	mWindow.setView(mWorldView);
 	mWindow.draw(mSceneGraph);
 }
 
 void World::loadTextures() {
+	//std::cout << "AND THUS THE WORLD'S TEXTURES WERE LOADED" << std::endl;
 	if (!mTexture.loadFromFile("../../Media/Sprite Sheet.png"))
 		throw std::runtime_error("Failed to load sprite sheet.");
 
@@ -57,6 +66,7 @@ void World::loadTextures() {
 
 void World::prepareSpriteMap() {
 	// I'm pretty sure this is roughly where I want this to be
+	std::cout << "AND THUS THE WORLD'S SPRITEMAP WAS PREPARED" << std::endl;
 
 	spriteMap[Aircraft::RedShip] = 1;
 	spriteMap[Aircraft::WhiteShip] = 18;
@@ -75,6 +85,7 @@ void World::prepareSpriteMap() {
 }
 
 void World::buildScene() {
+	std::cout << "AND THUS THE WORLD'S SCENE WAS BUILT" << std::endl;
 	for (std::size_t i = 0; i < LayerCount; ++i) {
 		SceneNode::Ptr layer(new SceneNode());
 		mSceneLayers[i] = layer.get();
@@ -98,7 +109,7 @@ void World::buildScene() {
 		new Aircraft(Aircraft::WhiteShip, mTexturePtr, spriteMapPtr));
 	mPlayerAircraft = leader.get();
 	mPlayerAircraft->setPosition(mSpawnPosition);
-	mPlayerAircraft->setVelocity(40.f, 0.f);
+	mPlayerAircraft->setVelocity(1.f, 0.f);
 	mSceneLayers[Air]->attachChild(std::move(leader));
 
 	// Let's add some escorts!

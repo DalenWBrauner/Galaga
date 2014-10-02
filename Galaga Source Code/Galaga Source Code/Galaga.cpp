@@ -138,6 +138,8 @@ void Galaga::update(sf::Time deltaTime) {
 
 	// Camera Movement
 	//mWorldView.move(0.f, mScrollSpeed * dt.asSeconds());
+
+	mWorld.update(deltaTime);
 	
 	// Keeping Score
 //	std::stringstream scoreText;
@@ -152,9 +154,10 @@ void Galaga::render() {
 	mWorld.draw();
 	mWindow.setView(mWindow.getDefaultView());
 
-	mWindow.draw(SFXText);
-	mWindow.draw(scoreDisplay);
-	mWindow.draw(mPlayer);
+//	mWindow.draw(SFXText);
+//	mWindow.draw(scoreDisplay);
+//	mWindow.draw(mPlayer);
+
 	mWindow.display();
 }
 
@@ -187,8 +190,11 @@ void Galaga::run() {
 
 int main() {
 	try {
+		std::cout << "Let's make a game!" << std::endl;
 		Galaga the_game;
+		std::cout << "Alright, time to run..." << std::endl;
 		the_game.run();
+		std::cout << "Phew, all done!" << std::endl;
 	}
 	catch (std::exception& e) {
 		std::cout << "\nEXCEPTION: " << e.what() << std::endl;

@@ -2,33 +2,22 @@
 
 SceneNode::SceneNode() {}
 
-void SceneNode::update(sf::Time dt) {
-	updateCurrent(dt);
-	updateChildren(dt);
-}
-
-void SceneNode::updateCurrent(sf::Time dt) {
-}
-
-void SceneNode::updateChildren(sf::Time dt) {
-	for (auto itr = mChildren.begin(); itr != mChildren.end(); ++itr) {
-		(*itr)->update(dt);
-	}
-}
 
 void SceneNode::attachChild(Ptr child) {
 	// Attaches the provided child
+	//std::cout << "SceneNode.attachChild()" << std::endl;
 	child->mParent = this;
 	mChildren.push_back(std::move(child));
 }
 
 SceneNode::Ptr SceneNode::detachChild(const SceneNode& node) {
 	// Detaches the provided child
+	//std::cout << "start: SceneNode.detachChild()" << std::endl;
 
 	// Find the node
 	auto found = std::find_if(mChildren.begin(), mChildren.end(),
 		[&](Ptr& p) -> bool { return p.get() == &node; });
-		
+
 	// Assert we found something
 	assert(found != mChildren.end());
 
@@ -39,20 +28,44 @@ SceneNode::Ptr SceneNode::detachChild(const SceneNode& node) {
 	return result;
 }
 
-void SceneNode::draw(sf::RenderTarget& target, sf::RenderStates states) const {
-	states.transform *= getTransform();
+
+void SceneNode::update(sf::Time dt) {
+	//std::cout << "SceneNode.update("<< dt.asSeconds << ")" << std::endl;
+	updateCurrent(dt);
+	updateChildren(dt);
 }
 
-void SceneNode::drawCurrent(sf::RenderTarget& target, sf::RenderStates states) const {
-//	for (const Ptr& child : mChildren) {
-//		child->draw(target, states);
-//	}
+void SceneNode::updateCurrent(sf::Time dt) {
+	//std::cout << "SceneNode.updateCurrent(" << dt.asSeconds << ")" << std::endl;
+}
+
+void SceneNode::updateChildren(sf::Time dt) {
+	//std::cout << "SceneNode.updateChildren(" << dt.asSeconds << ")" << std::endl;
 	for (auto itr = mChildren.begin(); itr != mChildren.end(); ++itr) {
-		(*itr)->draw(target, states);
+		(*itr)->update(dt);
 	}
 }
 
+
+void SceneNode::draw(sf::RenderTarget& target, sf::RenderStates states) const {
+	//std::cout << "SceneNode.draw()" << std::endl;
+
+	states.transform *= getTransform();
+
+	drawCurrent(target, states);
+
+	for (const Ptr& child : mChildren) {
+		child->draw(target, states);
+	}
+}
+
+void SceneNode::drawCurrent(sf::RenderTarget& target, sf::RenderStates states) const {
+	//std::cout << "SceneNode.draw()" << std::endl;
+}
+
+
 sf::Transform SceneNode::getWorldTransform() const {
+	//std::cout << "start: SceneNode.getWorldTransform()" << std::endl;
 	sf::Transform transform = sf::Transform::Identity;
 
 	for (const SceneNode* node = this; node != nullptr; node = node->mParent) {
@@ -62,5 +75,6 @@ sf::Transform SceneNode::getWorldTransform() const {
 }
 
 sf::Vector2f SceneNode::getWorldPosition() const {
+	//std::cout << "start: SceneNode.getWorldPosition()" << std::endl;
 	return getWorldTransform() * sf::Vector2f();
 }
