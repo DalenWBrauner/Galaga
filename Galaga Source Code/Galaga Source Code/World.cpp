@@ -17,6 +17,10 @@ World::World(sf::RenderWindow& window)
 	//std::cout << "AND THUS THE WORLD WAS BORN" << std::endl;
 }
 
+void World::movePlayer(sf::Vector2f movement){
+	mPlayerAircraft->setVelocity(movement);
+}
+
 void World::update(sf::Time dt) {
 	//std::cout << "AND THUS THE WORLD WAS UPDATED" << std::endl;
 	sf::Vector2f position = mPlayerAircraft->getPosition();

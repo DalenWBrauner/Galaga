@@ -134,7 +134,7 @@ void Galaga::update(sf::Time deltaTime) {
 		movement.x -= PlayerSpeed;
 	if (mIsMovingRight)
 		movement.x += PlayerSpeed;
-	mPlayer.move(movement * deltaTime.asSeconds());
+	mWorld.movePlayer(movement * deltaTime.asSeconds());
 
 	mWorld.update(deltaTime);
 	

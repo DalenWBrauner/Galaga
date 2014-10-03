@@ -6,6 +6,7 @@ public:
 	explicit			World(sf::RenderWindow& window);
 	void				update(sf::Time dt);
 	void				draw();
+	void				movePlayer(sf::Vector2f movement);
 
 private:
 	void				loadTextures();
