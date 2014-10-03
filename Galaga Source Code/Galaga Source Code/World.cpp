@@ -2,7 +2,7 @@
 
 World::World(sf::RenderWindow& window)
 	: mWindow(window)
-	, mWorldView(window.getDefaultView())
+	, mWorldView(sf::Vector2f(0, 0), sf::Vector2f(512.f, 480.f))
 	, mTexture()
 	, mSceneGraph()
 	, mSceneLayers()

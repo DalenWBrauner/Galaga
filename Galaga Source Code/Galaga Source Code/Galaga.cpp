@@ -152,10 +152,11 @@ void Galaga::render() {
 	mWindow.clear();
 
 	mWorld.draw();
-	mWindow.setView(mWindow.getDefaultView());
+	//mWindow.setView(getDefaultView()); is WRONG! The line below is correct:
+	//mWindow.setView( sf::View(sf::Vector2f(256.f, 240.f), sf::Vector2f(512.f, 480.f)));
 
-//	mWindow.draw(SFXText);
-//	mWindow.draw(scoreDisplay);
+	mWindow.draw(SFXText);
+	mWindow.draw(scoreDisplay);
 //	mWindow.draw(mPlayer);
 
 	mWindow.display();
