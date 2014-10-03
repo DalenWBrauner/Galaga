@@ -2,7 +2,6 @@
 
 SceneNode::SceneNode() {}
 
-
 void SceneNode::attachChild(Ptr child) {
 	// Attaches the provided child
 	//std::cout << "SceneNode.attachChild()" << std::endl;
@@ -28,7 +27,6 @@ SceneNode::Ptr SceneNode::detachChild(const SceneNode& node) {
 	return result;
 }
 
-
 void SceneNode::update(sf::Time dt) {
 	//std::cout << "SceneNode.update("<< dt.asSeconds << ")" << std::endl;
 	updateCurrent(dt);
@@ -46,14 +44,14 @@ void SceneNode::updateChildren(sf::Time dt) {
 	}
 }
 
-
 void SceneNode::draw(sf::RenderTarget& target, sf::RenderStates states) const {
 	//std::cout << "SceneNode.draw()" << std::endl;
 
+	// Draw self
 	states.transform *= getTransform();
-
 	drawCurrent(target, states);
 
+	// Draw children
 	for (const Ptr& child : mChildren) {
 		child->draw(target, states);
 	}
@@ -62,7 +60,6 @@ void SceneNode::draw(sf::RenderTarget& target, sf::RenderStates states) const {
 void SceneNode::drawCurrent(sf::RenderTarget& target, sf::RenderStates states) const {
 	//std::cout << "SceneNode.draw()" << std::endl;
 }
-
 
 sf::Transform SceneNode::getWorldTransform() const {
 	//std::cout << "start: SceneNode.getWorldTransform()" << std::endl;

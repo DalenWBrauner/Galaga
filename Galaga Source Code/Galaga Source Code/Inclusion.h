@@ -1,5 +1,6 @@
 /*
 This file includes anything ALL files need without redundant #include statements.
+I am very aware this is bad practice.
 
 Current shape of #include web:
 

@@ -136,9 +136,6 @@ void Galaga::update(sf::Time deltaTime) {
 		movement.x += PlayerSpeed;
 	mPlayer.move(movement * deltaTime.asSeconds());
 
-	// Camera Movement
-	//mWorldView.move(0.f, mScrollSpeed * dt.asSeconds());
-
 	mWorld.update(deltaTime);
 	
 	// Keeping Score
@@ -150,14 +147,11 @@ void Galaga::update(sf::Time deltaTime) {
 void Galaga::render() {
 	// Draws everything a user will see to the screen.
 	mWindow.clear();
-
-	mWorld.draw();
-	//mWindow.setView(getDefaultView()); is WRONG! The line below is correct:
 	//mWindow.setView( sf::View(sf::Vector2f(256.f, 240.f), sf::Vector2f(512.f, 480.f)));
 
+	mWorld.draw();
 	mWindow.draw(SFXText);
 	mWindow.draw(scoreDisplay);
-//	mWindow.draw(mPlayer);
 
 	mWindow.display();
 }
@@ -191,11 +185,11 @@ void Galaga::run() {
 
 int main() {
 	try {
-		std::cout << "Let's make a game!" << std::endl;
+		//std::cout << "Let's make a game!" << std::endl;
 		Galaga the_game;
-		std::cout << "Alright, time to run..." << std::endl;
+		//std::cout << "Alright, time to run..." << std::endl;
 		the_game.run();
-		std::cout << "Phew, all done!" << std::endl;
+		//std::cout << "Phew, all done!" << std::endl;
 	}
 	catch (std::exception& e) {
 		std::cout << "\nEXCEPTION: " << e.what() << std::endl;
