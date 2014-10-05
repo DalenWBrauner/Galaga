@@ -12,6 +12,7 @@ private:
 	void				loadTextures();
 	void				prepareSpriteMap();
 	void				buildScene();
+	void				invisibleWall();
 
 	enum Layer {
 		Background,
@@ -20,13 +21,12 @@ private:
 	};
 	sf::RenderWindow&					mWindow;
 	sf::View							mWorldView;
-//	TextureHolder						mTextures;
 	SceneNode							mSceneGraph;
 	std::array<SceneNode*, LayerCount>	mSceneLayers;
 	sf::FloatRect						mWorldBounds;
 	sf::Vector2f						mSpawnPosition;
-//	float								mScrollSpeed;
 	Aircraft*							mPlayerAircraft;
+	float								mBoundsOffset;
 
 	// Textures
 	sf::Texture mTexture;

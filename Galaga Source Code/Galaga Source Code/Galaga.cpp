@@ -17,7 +17,7 @@ Galaga::Galaga()
 	// Constants set at game instantiation
 	mPlayer.setPosition(250.f, 400.f);
 	mPlayer.setOrigin(8, 8);
-	PlayerSpeed = 200.f;
+	PlayerSpeed = 5000.f;
 	TimePerFrame = sf::seconds(1.f / 60.f);
 
 	// Variables

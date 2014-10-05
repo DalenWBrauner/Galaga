@@ -7,9 +7,10 @@ World::World(sf::RenderWindow& window)
 	, mSceneGraph()
 	, mSceneLayers()
 	, mWorldBounds(0.f, 0.f, 512.f, 480.f)
-	, mSpawnPosition(250.f, 400.f)	// This will become variable once I better understand boundaries
+	, mSpawnPosition(mWorldBounds.width/2, 400.f)
 	, mPlayerAircraft(nullptr)
 {
+	mBoundsOffset = 32;
 	mWorldView.setCenter(256, 240);
 	loadTextures();
 	prepareSpriteMap();
@@ -23,13 +24,7 @@ void World::movePlayer(sf::Vector2f movement){
 
 void World::update(sf::Time dt) {
 	//std::cout << "AND THUS THE WORLD WAS UPDATED" << std::endl;
-	sf::Vector2f position = mPlayerAircraft->getPosition();
-	sf::Vector2f velocity = mPlayerAircraft->getVelocity();
-
-	if (position.x <= mWorldBounds.left || position.x >= mWorldBounds.width) {
-		velocity.x = -velocity.x;
-		mPlayerAircraft->setVelocity(velocity);
-	}
+	invisibleWall();
 	mSceneGraph.update(dt);
 }
 
@@ -79,7 +74,7 @@ void World::buildScene() {
 	std::unique_ptr<Aircraft> leader(new Aircraft(Aircraft::WhiteShip, mTexturePtr, spriteMapPtr));
 	mPlayerAircraft = leader.get();
 	mPlayerAircraft->setPosition(mSpawnPosition);
-	mPlayerAircraft->setVelocity(1.f, 0.f);
+	mPlayerAircraft->setVelocity(0.f, 0.f);
 	mSceneLayers[Air]->attachChild(std::move(leader));
 
 	// Let's add some escorts!
@@ -90,4 +85,21 @@ void World::buildScene() {
 	std::unique_ptr<Aircraft> rightEscort(new Aircraft(Aircraft::RedShip, mTexturePtr, spriteMapPtr));
 	rightEscort->setPosition(80.f, 50.f);
 	mPlayerAircraft->attachChild(std::move(rightEscort));
+}
+
+void World::invisibleWall() {
+	// This acts as an "invisible wall" to keep the player on the screen
+	sf::Vector2f position = mPlayerAircraft->getPosition();
+	sf::Vector2f velocity = mPlayerAircraft->getVelocity();
+
+	// If the player is too far Left, prevent Left movement
+	if ( (position.x <= mWorldBounds.left + mBoundsOffset)
+		&& (velocity.x < 0)) { velocity.x = 0; }
+
+	// If the player is too far Right, prevent Right movement
+	else if ((position.x >= mWorldBounds.width - mBoundsOffset)
+		&& (velocity.x > 0)) { velocity.x = 0; }
+
+	// Set their modified velocity
+	mPlayerAircraft->setVelocity(velocity);
 }
