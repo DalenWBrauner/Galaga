@@ -3,30 +3,14 @@
 Galaga::Galaga()
 	: mWindow(sf::VideoMode(512, 480), "GALAGA")
 	, mWorld(mWindow)
-	, mTexture()
-	, mPlayer()
 	{
-
 	loadAssets();
-
-	// Sets the player to the ship sprite
-	mPlayer.setTexture(mTexture);
-	mPlayer.setTextureRect(sf::IntRect(120, 1, 16, 16));
-	mPlayer.setScale(sf::Vector2f(2.f, 2.f));
-
-	// Constants set at game instantiation
-	mPlayer.setPosition(250.f, 400.f);
-	mPlayer.setOrigin(8, 8);
 	PlayerSpeed = 5000.f;
 	TimePerFrame = sf::seconds(1.f / 60.f);
+	yourScore = 0;
+	highScore = 0;	//Temporary
 
-	// Variables
-	highscore = 0;	//Obviously temporary placement
-	yourscore = 0;
-	mIsMovingLeft = false;
-	mIsMovingRight = false;
-
-	// Setup SFX
+	// Prepare SFX
 	sfxCoin.setBuffer(sbfCoin);
 	sfxCaptured.setBuffer(sbfCaptured);
 	sfxFiring.setBuffer(sbfFiring);
@@ -54,9 +38,6 @@ void Galaga::loadAssets() {
 	if (!font.loadFromFile("../../Media/Galaga.ttf"))
 		throw std::runtime_error("Failed to load font.");
 
-	if (!mTexture.loadFromFile("../../Media/Sprite Sheet.png"))
-		throw std::runtime_error("Failed to load sprite sheet.");
-
 	if (!sbfCoin.loadFromFile("../../Media/Coin.wav"))
 		throw std::runtime_error("Failed to load coin.wav.");
 	if (!sbfCaptured.loadFromFile("../../Media/Fighter_Captured.wav"))
@@ -71,18 +52,11 @@ void Galaga::loadAssets() {
 		throw std::runtime_error("Failed to load coin.wav.");
 	if (!sbfIntro.loadFromFile("../../Media/Theme_Song.wav"))
 		throw std::runtime_error("Failed to load coin.wav.");
-
 }
 
 void Galaga::handlePlayerInput(sf::Keyboard::Key key, bool isPressed) {
 	// Controls the game based on user input.
 	switch (key) {
-	case sf::Keyboard::Left:
-		mIsMovingLeft = isPressed;
-		break;
-	case sf::Keyboard::Right:
-		mIsMovingRight = isPressed;
-		break;
 	case sf::Keyboard::Q:
 		sfxIntro.play();
 		break;
@@ -108,18 +82,27 @@ void Galaga::handlePlayerInput(sf::Keyboard::Key key, bool isPressed) {
 }
 
 void Galaga::processEvents() {
-	//	Accepts user input.
+	//	Accepts user input. (One input at a time)
 	sf::Event event;
 	while (mWindow.pollEvent(event)) {
 		switch (event.type) {
+		case sf::Event::Closed:
+			mWindow.close();
+			break;
+		case sf::Event::LostFocus:
+			//pause functionality
+			break;
 		case sf::Event::KeyPressed:
 			handlePlayerInput(event.key.code, true);
 			break;
 		case sf::Event::KeyReleased:
 			handlePlayerInput(event.key.code, false);
 			break;
-		case sf::Event::Closed:
-			mWindow.close();
+		case sf::Event::JoystickButtonPressed:
+			handlePlayerInput(event.key.code, true);
+			break;
+		case sf::Event::JoystickButtonReleased:
+			handlePlayerInput(event.key.code, false);
 			break;
 		}
 	}
@@ -130,9 +113,9 @@ void Galaga::update(sf::Time deltaTime) {
 
 	// Player Movement
 	sf::Vector2f movement(0.f, 0.f);
-	if (mIsMovingLeft)
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
 		movement.x -= PlayerSpeed;
-	if (mIsMovingRight)
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
 		movement.x += PlayerSpeed;
 	mWorld.movePlayer(movement * deltaTime.asSeconds());
 

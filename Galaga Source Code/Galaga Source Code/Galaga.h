@@ -24,10 +24,6 @@ private:
 	sf::Text SFXText;
 	sf::Text scoreDisplay;
 
-	// Images
-	sf::Texture mTexture;
-	sf::Sprite mPlayer;
-
 	// Audio
 	sf::SoundBuffer sbfCoin;
 	sf::SoundBuffer sbfCaptured;
@@ -46,12 +42,10 @@ private:
 
 	// Motion
 	float PlayerSpeed;
-	bool mIsMovingLeft;
-	bool mIsMovingRight;
 
 	// Other
-	int yourscore;
-	int highscore;
+	int yourScore;
+	int highScore;
 
 	// Class Methods
 	void handlePlayerInput(sf::Keyboard::Key, bool);

@@ -34,5 +34,4 @@ private:
 	// Sprite Map
 	std::map<Aircraft::EnemyType, int>	spriteMap;
 	std::shared_ptr<std::map<Aircraft::EnemyType, int>> spriteMapPtr;
-	
 };
