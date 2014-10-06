@@ -17,7 +17,7 @@ std::function<void(SceneNode&, sf::Time)> derivedAction(Function fn) {
 
 void Player::handleRealTimeInput(CommandQueue& commands) {
 	const float playerSpeed = 30.f;
-
+	/*
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) {
 		Command moveLeft;
 		moveLeft.category = Category::PlayerAircraft;
@@ -25,9 +25,11 @@ void Player::handleRealTimeInput(CommandQueue& commands) {
 			EntityMover(-playerSpeed, 0.f));
 		commands.push(moveLeft);
 	}
+	*/
 }
 
 void Player::handleEvent(const sf::Event& event, CommandQueue& commands) {
+	/*
 	if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::P) {
 		Command output;
 		output.category = Category::PlayerAircraft;
@@ -36,4 +38,5 @@ void Player::handleEvent(const sf::Event& event, CommandQueue& commands) {
 		};
 		commands.push(output);
 	}
+	*/
 }

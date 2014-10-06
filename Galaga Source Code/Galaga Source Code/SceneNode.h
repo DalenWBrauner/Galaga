@@ -62,7 +62,7 @@ private:
 
 struct Command {
 	Command();
-	std::function<void(SceneNode&, sf::Time)>		action;
+	std::function<void(SceneNode& s, sf::Time dt)>	action;
 	unsigned int									category;
 };
 
