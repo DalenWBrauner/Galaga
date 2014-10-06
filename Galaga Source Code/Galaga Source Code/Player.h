@@ -1,6 +1,7 @@
 #ifndef Player_h
 #define Player_h
-#include "Galaga.h"
+//#include "Galaga.h"
+#include "Aircraft.h"
 
 class Player;
 

@@ -1,6 +1,7 @@
 #ifndef World_h
 #define World_h
-#include "Aircraft.h"
+//#include "Aircraft.h"
+#include "Player.h"
 #include <array>
 
 class World;

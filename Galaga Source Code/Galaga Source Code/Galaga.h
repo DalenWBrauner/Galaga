@@ -10,7 +10,7 @@
 #ifndef Galaga_h
 #define Galaga_h
 #include "World.h"
-#include "Player.h"
+//#include "Player.h"
 #include <sstream>
 
 class Galaga;
