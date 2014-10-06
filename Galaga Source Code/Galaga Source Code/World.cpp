@@ -24,6 +24,12 @@ void World::movePlayer(sf::Vector2f movement){
 
 void World::update(sf::Time dt) {
 	//std::cout << "AND THUS THE WORLD WAS UPDATED" << std::endl;
+
+	// Forward commands to the scene graph
+	while (!mCommandQueue.isEmpty()) {
+		mSceneGraph.onCommand(mCommandQueue.pop(), dt);
+	}
+
 	invisibleWall();
 	mSceneGraph.update(dt);
 }
@@ -102,4 +108,8 @@ void World::invisibleWall() {
 
 	// Set their modified velocity
 	mPlayerAircraft->setVelocity(velocity);
+}
+
+CommandQueue& World::getCommandQueue() {
+	return mCommandQueue;
 }

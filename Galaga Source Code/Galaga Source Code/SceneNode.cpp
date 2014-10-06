@@ -1,6 +1,55 @@
 #include "SceneNode.h"
 
+// SceneNode Definitions
 SceneNode::SceneNode() {}
+
+void SceneNode::update(sf::Time dt) {
+	//std::cout << "SceneNode.update("<< dt.asSeconds << ")" << std::endl;
+	updateCurrent(dt);
+	updateChildren(dt);
+}
+
+void SceneNode::updateCurrent(sf::Time dt) {
+	//std::cout << "SceneNode.updateCurrent(" << dt.asSeconds << ")" << std::endl;
+}
+
+void SceneNode::updateChildren(sf::Time dt) {
+	//std::cout << "SceneNode.updateChildren(" << dt.asSeconds << ")" << std::endl;
+	for (const Ptr& child : mChildren) {
+		child->update(dt);
+	}
+}
+
+unsigned int SceneNode::getCategory() const {
+	return Category::Scene;
+}
+
+void SceneNode::onCommand(const Command& command, sf::Time dt) {
+	if (command.category & getCategory()) {
+		command.action(*this, dt);
+	}
+
+	for (const Ptr& child : mChildren) {
+		child->onCommand(command, dt);
+	}
+}
+
+void SceneNode::draw(sf::RenderTarget& target, sf::RenderStates states) const {
+	//std::cout << "SceneNode.draw()" << std::endl;
+
+	// Draw self
+	states.transform *= getTransform();
+	drawCurrent(target, states);
+
+	// Draw children
+	for (const Ptr& child : mChildren) {
+		child->draw(target, states);
+	}
+}
+
+void SceneNode::drawCurrent(sf::RenderTarget& target, sf::RenderStates states) const {
+	//std::cout << "SceneNode.draw()" << std::endl;
+}
 
 void SceneNode::attachChild(Ptr child) {
 	// Attaches the provided child
@@ -27,40 +76,6 @@ SceneNode::Ptr SceneNode::detachChild(const SceneNode& node) {
 	return result;
 }
 
-void SceneNode::update(sf::Time dt) {
-	//std::cout << "SceneNode.update("<< dt.asSeconds << ")" << std::endl;
-	updateCurrent(dt);
-	updateChildren(dt);
-}
-
-void SceneNode::updateCurrent(sf::Time dt) {
-	//std::cout << "SceneNode.updateCurrent(" << dt.asSeconds << ")" << std::endl;
-}
-
-void SceneNode::updateChildren(sf::Time dt) {
-	//std::cout << "SceneNode.updateChildren(" << dt.asSeconds << ")" << std::endl;
-	for (auto itr = mChildren.begin(); itr != mChildren.end(); ++itr) {
-		(*itr)->update(dt);
-	}
-}
-
-void SceneNode::draw(sf::RenderTarget& target, sf::RenderStates states) const {
-	//std::cout << "SceneNode.draw()" << std::endl;
-
-	// Draw self
-	states.transform *= getTransform();
-	drawCurrent(target, states);
-
-	// Draw children
-	for (const Ptr& child : mChildren) {
-		child->draw(target, states);
-	}
-}
-
-void SceneNode::drawCurrent(sf::RenderTarget& target, sf::RenderStates states) const {
-	//std::cout << "SceneNode.draw()" << std::endl;
-}
-
 sf::Transform SceneNode::getWorldTransform() const {
 	//std::cout << "start: SceneNode.getWorldTransform()" << std::endl;
 	sf::Transform transform = sf::Transform::Identity;
@@ -74,4 +89,19 @@ sf::Transform SceneNode::getWorldTransform() const {
 sf::Vector2f SceneNode::getWorldPosition() const {
 	//std::cout << "start: SceneNode.getWorldPosition()" << std::endl;
 	return getWorldTransform() * sf::Vector2f();
+}
+
+// CommandQueue Definitions
+void CommandQueue::push(const Command& command) {
+	mQueue.push(command);
+}
+
+Command CommandQueue::pop() {
+	Command return_value = mQueue.front();
+	mQueue.pop();	// Apparently doesn't return anything
+	return return_value;
+}
+
+bool CommandQueue::isEmpty() const {
+	return mQueue.empty();
 }

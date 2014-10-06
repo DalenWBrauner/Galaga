@@ -9,6 +9,7 @@ public:
 	void				update(sf::Time dt);
 	void				draw();
 	void				movePlayer(sf::Vector2f movement);
+	CommandQueue&		getCommandQueue();
 
 private:
 	void				loadTextures();
@@ -29,6 +30,7 @@ private:
 	sf::Vector2f						mSpawnPosition;
 	Aircraft*							mPlayerAircraft;
 	float								mBoundsOffset;
+	CommandQueue						mCommandQueue;
 
 	// Textures
 	sf::Texture mTexture;
