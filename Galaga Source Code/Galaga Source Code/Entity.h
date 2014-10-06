@@ -3,7 +3,7 @@
 #include "SceneNode.h"
 
 class Entity;
-struct EntityMover;
+class EntityMover;
 
 class Entity : public SceneNode {
 public:
@@ -18,10 +18,12 @@ private:
 	virtual void	updateCurrent(sf::Time dt);
 };
 
-struct EntityMover {
-	EntityMover(float vx, float vy) : velocity(vx, vy) {}
+class EntityMover {
+private:
 	sf::Vector2f velocity;
-	void operator() (Entity& entity, sf::Time) const {
+public:
+	EntityMover(float vx, float vy) : velocity(vx, vy) {}
+	void operator() (Entity& entity, sf::Time dt) const {
 		entity.accelerate(velocity);
 	}
 };
