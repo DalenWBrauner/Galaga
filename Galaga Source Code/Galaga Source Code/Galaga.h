@@ -9,6 +9,8 @@
 #include "World.h"
 #include <sstream>
 
+class Galaga;
+
 class Galaga {
 
 private:

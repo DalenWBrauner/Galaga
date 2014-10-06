@@ -2,9 +2,11 @@
 #include <memory>
 #include <map>
 
+class Aircraft;
+
 class Aircraft : public Entity {
 public:
-	enum			EnemyType {
+	enum			ShipType {
 //		EnemyName	 // Line # on Sprite Sheet
 		WhiteShip,	 // Line 1
 		RedShip,	 // Line 2
@@ -20,13 +22,13 @@ public:
 		Petalcopter, // Line 12	
 	};
 	explicit		Aircraft(
-		EnemyType enemyType,
+		ShipType shipType,
 		std::shared_ptr<sf::Texture> mTexture,
-		std::shared_ptr<std::map<EnemyType, int>> spriteMap
+		std::shared_ptr<std::map<ShipType, int>> spriteMap
 		);
 	virtual void	drawCurrent(sf::RenderTarget& target, sf::RenderStates states) const;
 
 private:
-	EnemyType			mEnemyType;
+	ShipType			mShipType;
 	sf::Sprite			mSprite;
 };

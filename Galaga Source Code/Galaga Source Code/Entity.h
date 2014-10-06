@@ -1,5 +1,7 @@
 #include "SceneNode.h"
 
+class Entity;
+
 class Entity : public SceneNode {
 public:
 	void			setVelocity(sf::Vector2f velocity);

@@ -1,6 +1,8 @@
 #include "Aircraft.h"
 #include <array>
 
+class World;
+
 class World : private sf::NonCopyable {
 public:
 	explicit			World(sf::RenderWindow& window);
@@ -32,6 +34,6 @@ private:
 	sf::Texture mTexture;
 	std::shared_ptr<sf::Texture> mTexturePtr;
 	// Sprite Map
-	std::map<Aircraft::EnemyType, int>	spriteMap;
-	std::shared_ptr<std::map<Aircraft::EnemyType, int>> spriteMapPtr;
+	std::map<Aircraft::ShipType, int>	spriteMap;
+	std::shared_ptr<std::map<Aircraft::ShipType, int>> spriteMapPtr;
 };

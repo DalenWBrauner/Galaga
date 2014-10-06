@@ -5,7 +5,7 @@ Galaga::Galaga()
 	, mWorld(mWindow)
 	{
 	loadAssets();
-	PlayerSpeed = 5000.f;
+	PlayerSpeed = 7500.f;
 	TimePerFrame = sf::seconds(1.f / 60.f);
 	yourScore = 0;
 	highScore = 0;	//Temporary

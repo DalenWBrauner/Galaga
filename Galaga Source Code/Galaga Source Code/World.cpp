@@ -46,8 +46,8 @@ void World::prepareSpriteMap() {
 	// I'm pretty sure this is roughly where I want this to be
 	//std::cout << "AND THUS THE WORLD'S SPRITEMAP WAS PREPARED" << std::endl;
 
-	spriteMap[Aircraft::RedShip] = 1;
-	spriteMap[Aircraft::WhiteShip] = 18;
+	spriteMap[Aircraft::WhiteShip] = 1;
+	spriteMap[Aircraft::RedShip] = 18;
 	spriteMap[Aircraft::DawnOwl] = 35;
 	spriteMap[Aircraft::DuskOwl] = 52;
 	spriteMap[Aircraft::Butterfly] = 69;
@@ -59,7 +59,7 @@ void World::prepareSpriteMap() {
 	spriteMap[Aircraft::Enterprise] = 171;
 	spriteMap[Aircraft::Petalcopter] = 188;
 
-	spriteMapPtr = std::make_shared<std::map<Aircraft::EnemyType, int>>(spriteMap);
+	spriteMapPtr = std::make_shared<std::map<Aircraft::ShipType, int>>(spriteMap);
 }
 
 void World::buildScene() {
