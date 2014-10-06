@@ -20,3 +20,11 @@ void Entity::updateCurrent(sf::Time dt) {
 	//std::cout << "Entity.updateCurrent(" << dt.asSeconds() << ")" << std::endl;
 	move(mVelocity * dt.asSeconds());
 }
+
+void Entity::accelerate(sf::Vector2f velocity) {
+	setVelocity(getVelocity() + velocity);
+}
+
+void Entity::accelerate(float vx, float vy) {
+	setVelocity(mVelocity.x + vx, mVelocity.y + vy);
+}

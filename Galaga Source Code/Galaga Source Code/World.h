@@ -1,3 +1,5 @@
+#ifndef World_h
+#define World_h
 #include "Aircraft.h"
 #include <array>
 
@@ -39,3 +41,5 @@ private:
 	std::map<Aircraft::ShipType, int>	spriteMap;
 	std::shared_ptr<std::map<Aircraft::ShipType, int>> spriteMapPtr;
 };
+
+#endif

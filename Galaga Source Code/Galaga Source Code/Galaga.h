@@ -6,7 +6,11 @@
 #pragma comment(lib, "winmm.lib")
 #pragma comment(lib, "gdi32.lib")  
 #endif // SFML_STATIC
+
+#ifndef Galaga_h
+#define Galaga_h
 #include "World.h"
+#include "Player.h"
 #include <sstream>
 
 class Galaga;
@@ -14,6 +18,9 @@ class Galaga;
 class Galaga {
 
 private:
+	// Player
+	Player mPlayer;
+
 	// World
 	World mWorld;
 
@@ -64,3 +71,5 @@ public:
 	void run();
 
 };
+
+#endif

@@ -1,3 +1,5 @@
+#ifndef SceneNode_h
+#define SceneNode_h
 #include "Inclusion.h"
 #include <vector>
 #include <memory>
@@ -83,3 +85,5 @@ public:
 private:
 	std::queue<Command> mQueue;
 };
+
+#endif

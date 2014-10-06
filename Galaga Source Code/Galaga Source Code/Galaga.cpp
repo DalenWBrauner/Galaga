@@ -3,6 +3,7 @@
 Galaga::Galaga()
 	: mWindow(sf::VideoMode(512, 480), "GALAGA")
 	, mWorld(mWindow)
+	, mPlayer()
 	{
 	loadAssets();
 	PlayerSpeed = 7500.f;
@@ -83,29 +84,23 @@ void Galaga::handlePlayerInput(sf::Keyboard::Key key, bool isPressed) {
 
 void Galaga::processEvents() {
 	//	Accepts user input. (One input at a time)
+
+	CommandQueue& commands = mWorld.getCommandQueue();
+
 	sf::Event event;
 	while (mWindow.pollEvent(event)) {
-		switch (event.type) {
-		case sf::Event::Closed:
+		if (event.type == sf::Event::Closed) {
 			mWindow.close();
-			break;
-		case sf::Event::LostFocus:
+		}
+		else if (event.type == sf::Event::LostFocus) {
 			//pause functionality
-			break;
-		case sf::Event::KeyPressed:
-			handlePlayerInput(event.key.code, true);
-			break;
-		case sf::Event::KeyReleased:
-			handlePlayerInput(event.key.code, false);
-			break;
-		case sf::Event::JoystickButtonPressed:
-			handlePlayerInput(event.key.code, true);
-			break;
-		case sf::Event::JoystickButtonReleased:
-			handlePlayerInput(event.key.code, false);
-			break;
+		}
+		else {
+			mPlayer.handleEvent(event, commands);
 		}
 	}
+
+	mPlayer.handleRealTimeInput(commands);
 }
 
 void Galaga::update(sf::Time deltaTime) {

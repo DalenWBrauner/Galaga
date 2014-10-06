@@ -1,3 +1,5 @@
+#ifndef Aircraft_h
+#define Aircraft_h
 #include "Entity.h"
 #include <memory>
 #include <map>
@@ -32,3 +34,5 @@ private:
 	ShipType			mShipType;
 	sf::Sprite			mSprite;
 };
+
+#endif
