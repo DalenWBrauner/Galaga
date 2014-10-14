@@ -16,33 +16,41 @@ std::function<void(SceneNode& node, sf::Time dt)> derivedAction(Function fn) {
 }
 
 void Player::handleRealTimeInput(CommandQueue& commands) {
-	const float playerSpeed = 30.f;
+	// For commands that depend on the current state
+	// "You're pressing [keystroke]!"
+
+	const float PlayerSpeed = 7500.f;
 	
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) {
-		std::cout << "You pressed up!" << std::endl;
-		std::cout << "I'm going to instantiate a command!" << std::endl;
+		std::cout << "You're pressing up!" << std::endl;
+
 		Command moveLeft;
-		std::cout << "Now I'm going to set its category!" << std::endl;
 		moveLeft.category = Category::PlayerAircraft;
-		std::cout << "Now I'm going to set its action!" << std::endl;
-		moveLeft.action = derivedAction<Entity>(EntityMover(-playerSpeed, 0.f));
-		std::cout << "Now I'm going to insert it into the CommandQueue!" << std::endl;
+		moveLeft.action = derivedAction<Entity>(EntityMover(-PlayerSpeed, 0.f));
 		commands.push(moveLeft);
+	}
+	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) {
+		std::cout << "You're pressing down!" << std::endl;
+
+		Command moveRight;
+		moveRight.category = Category::PlayerAircraft;
+		moveRight.action = derivedAction<Entity>(EntityMover(PlayerSpeed, 0.f));
+		commands.push(moveRight);
 	}
 }
 
 void Player::handleEvent(const sf::Event& event, CommandQueue& commands) {
+	// For commands that depend on when the state changes
+	// "You pressed [keystroke]!"
+
 	if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::P) {
 		std::cout << "You pressed P!" << std::endl;
-		std::cout << "I'm going to instantiate a command!" << std::endl;
+
 		Command output;
-		std::cout << "Now I'm going to set its category!" << std::endl;
 		output.category = Category::PlayerAircraft;
-		std::cout << "Now I'm going to set its action!" << std::endl;
 		output.action = [](SceneNode& s, sf::Time dt) {
 			std::cout << s.getPosition().x << "," << s.getPosition().y << std::endl;
 		};
-		std::cout << "Now I'm going to insert it into the CommandQueue!" << std::endl;
 		commands.push(output);
 	}
 }

@@ -57,7 +57,7 @@ private:
 	int highScore;
 
 	// Class Methods
-	void handlePlayerInput(sf::Keyboard::Key, bool);
+	void handleGameInput();
 	void processEvents();
 	void update(sf::Time);
 	void render();

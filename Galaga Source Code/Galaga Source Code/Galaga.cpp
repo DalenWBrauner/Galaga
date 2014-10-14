@@ -55,52 +55,53 @@ void Galaga::loadAssets() {
 		throw std::runtime_error("Failed to load coin.wav.");
 }
 
-void Galaga::handlePlayerInput(sf::Keyboard::Key key, bool isPressed) {
-	// Controls the game based on user input.
-	switch (key) {
-	case sf::Keyboard::Q:
+void Galaga::handleGameInput() {
+	// For handling input unrelated to the player object.
+	if		(sf::Keyboard::isKeyPressed(sf::Keyboard::Q)) {
 		sfxIntro.play();
-		break;
-	case sf::Keyboard::W:
+	}
+	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::W)) {
 		sfxStart.play();
-		break;
-	case sf::Keyboard::E:
+	}
+	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::E)) {
 		sfxIncoming.play();
-		break;
-	case sf::Keyboard::R:
+	}
+	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::R)) {
 		sfxFiring.play();
-		break;
-	case sf::Keyboard::T:
+	}
+	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::T)) {
 		sfxDestroyed.play();
-		break;
-	case sf::Keyboard::Y:
+	}
+	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Y)) {
 		sfxCoin.play();
-		break;
-	case sf::Keyboard::U:
+	}
+	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::U)) {
 		sfxCaptured.play();
-		break;
 	}
 }
 
 void Galaga::processEvents() {
-	//	Accepts user input. (One input at a time)
+	//	Accepts user input.
 
 	CommandQueue& commands = mWorld.getCommandQueue();
 
 	sf::Event event;
 	while (mWindow.pollEvent(event)) {
+		// While there are still events on the event stack:
 		if (event.type == sf::Event::Closed) {
 			mWindow.close();
 		}
 		else if (event.type == sf::Event::LostFocus) {
-			//pause functionality
+			//pause the game
 		}
 		else {
+			// for handling events sequentially
 			mPlayer.handleEvent(event, commands);
 		}
 	}
-
+	// for checking current events
 	mPlayer.handleRealTimeInput(commands);
+	handleGameInput();
 }
 
 void Galaga::update(sf::Time deltaTime) {
