@@ -26,7 +26,8 @@ public:
 	explicit		Aircraft(
 		ShipType shipType,
 		std::shared_ptr<sf::Texture> mTexture,
-		std::shared_ptr<std::map<ShipType, int>> spriteMap
+		std::shared_ptr<std::map<ShipType, int>> spriteMap,
+		bool isPlayer=false
 		);
 	virtual void	drawCurrent(sf::RenderTarget& target, sf::RenderStates states) const;
 

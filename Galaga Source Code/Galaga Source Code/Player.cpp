@@ -19,7 +19,7 @@ void Player::handleRealTimeInput(CommandQueue& commands) {
 	// For commands that depend on the current state
 	// "You're pressing [keystroke]!"
 
-	const float PlayerSpeed = 7500.f;
+	const float PlayerSpeed = 75.f;
 	
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) {
 		std::cout << "You're pressing up!" << std::endl;

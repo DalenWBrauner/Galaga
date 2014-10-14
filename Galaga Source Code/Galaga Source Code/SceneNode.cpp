@@ -1,7 +1,9 @@
 #include "SceneNode.h"
 
 // SceneNode Definitions
-SceneNode::SceneNode() {}
+SceneNode::SceneNode() {
+	mCategory = Category::Type::Scene;
+}
 
 void SceneNode::update(sf::Time dt) {
 	//std::cout << "SceneNode.update("<< dt.asSeconds << ")" << std::endl;
@@ -21,7 +23,7 @@ void SceneNode::updateChildren(sf::Time dt) {
 }
 
 unsigned int SceneNode::getCategory() const {
-	return Category::Scene;
+	return mCategory;
 }
 
 void SceneNode::onCommand(const Command& command, sf::Time dt) {
