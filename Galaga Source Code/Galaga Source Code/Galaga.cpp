@@ -25,7 +25,7 @@ Galaga::Galaga()
 	SFXText.setCharacterSize(15);
 	SFXText.setColor(sf::Color::White);
 	SFXText.setPosition(25, 50);
-	SFXText.setString("Q: Intro\nW: Start\nE: Incoming\nR: Firing\nT: Destroyed\nY: Coin\nU: Captured");
+	SFXText.setString("SFX:\nQ: Intro\nW: Start\nE: Incoming\nR: Firing\nT: Destroyed\nY: Coin\nU: Captured");
 
 	scoreDisplay.setFont(font);
 	scoreDisplay.setCharacterSize(15);
