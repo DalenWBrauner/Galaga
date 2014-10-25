@@ -165,12 +165,19 @@
     <ClCompile Include="Aircraft.cpp" />
     <ClCompile Include="SceneNode.cpp" />
     <ClCompile Include="Player.cpp" />
+    <ClCompile Include="Application.cpp" />
+    <ClCompile Include="State.cpp" />
+    <ClCompile Include="StateStack.cpp" />
     <ClCompile Include="World.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Galaga.h" />
     <ClInclude Include="Entity.h" />
     <ClInclude Include="Aircraft.h" />
+    <ClInclude Include="Application.h" />
+    <ClInclude Include="StateIdentifiers.h" />
+    <ClInclude Include="State.h" />
+    <ClInclude Include="StateStack.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Inclusion.h" />
     <ClInclude Include="World.h" />
