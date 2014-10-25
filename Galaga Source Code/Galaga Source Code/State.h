@@ -1,3 +1,4 @@
+/*
 #ifndef State_h
 #define State_h
 
@@ -40,3 +41,4 @@ private:
 };
 
 #endif
+*/

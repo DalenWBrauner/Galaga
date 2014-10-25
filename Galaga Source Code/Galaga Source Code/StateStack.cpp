@@ -1,4 +1,4 @@
-#include "StateStack.h"
+/*#include "StateStack.h"
 
 template <typename T>
 void StateStack::registerState(States::ID stateID) {
@@ -38,3 +38,4 @@ void StateStack::applyPendingChanges() {
 	}
 	mPendingList.clear();
 }
+*/
