@@ -11,7 +11,6 @@
 #define Galaga_h
 #include "World.h"
 #include "State.h"
-//#include "Player.h"
 #include <sstream>
 
 class Galaga;
@@ -28,6 +27,11 @@ private:
 	// Mechanics
 	sf::RenderWindow mWindow;
 	sf::Time TimePerFrame;
+	const static float PlayerSpeed;
+
+	// Score
+	int yourScore;
+	int highScore;
 
 	// Text
 	sf::Font font;
@@ -49,13 +53,6 @@ private:
 	sf::Sound sfxDestroyed;
 	sf::Sound sfxStart;
 	sf::Sound sfxIntro;
-
-	// Motion
-	float PlayerSpeed;
-
-	// Other
-	int yourScore;
-	int highScore;
 
 	// Class Methods
 	void handleGameInput();

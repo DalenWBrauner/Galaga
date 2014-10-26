@@ -1,12 +1,13 @@
 #include "Galaga.h"
 
+const float Galaga::PlayerSpeed = 10000.0f; // It's really strange this number is so high
+
 Galaga::Galaga()
 	: mWindow(sf::VideoMode(512, 480), "GALAGA")
 	, mWorld(mWindow)
 	, mPlayer()
 	{
 	loadAssets();
-	PlayerSpeed = 7500.f;
 	TimePerFrame = sf::seconds(1.f / 60.f);
 	yourScore = 0;
 	highScore = 0;	//Temporary
@@ -126,7 +127,6 @@ void Galaga::update(sf::Time deltaTime) {
 void Galaga::render() {
 	// Draws everything a user will see to the screen.
 	mWindow.clear();
-	//mWindow.setView( sf::View(sf::Vector2f(256.f, 240.f), sf::Vector2f(512.f, 480.f)));
 
 	mWorld.draw();
 	mWindow.draw(SFXText);
@@ -164,11 +164,8 @@ void Galaga::run() {
 
 int main() {
 	try {
-		//std::cout << "Let's make a game!" << std::endl;
 		Galaga the_game;
-		//std::cout << "Alright, time to run..." << std::endl;
 		the_game.run();
-		//std::cout << "Phew, all done!" << std::endl;
 	}
 	catch (std::exception& e) {
 		std::cout << "\nEXCEPTION: " << e.what() << std::endl;
