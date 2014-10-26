@@ -161,3 +161,16 @@ void Galaga::run() {
 		render();
 	}
 }
+
+int main() {
+	try {
+		//std::cout << "Let's make a game!" << std::endl;
+		Galaga the_game;
+		//std::cout << "Alright, time to run..." << std::endl;
+		the_game.run();
+		//std::cout << "Phew, all done!" << std::endl;
+	}
+	catch (std::exception& e) {
+		std::cout << "\nEXCEPTION: " << e.what() << std::endl;
+	}
+}

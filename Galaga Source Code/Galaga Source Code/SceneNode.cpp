@@ -39,22 +39,18 @@ void SceneNode::onCommand(const Command& command, sf::Time dt) {
 void SceneNode::draw(sf::RenderTarget& target, sf::RenderStates states) const {
 	//std::cout << "SceneNode.draw()" << std::endl;
 
-	// "Apply transform of current node"
+	// Draw self
 	states.transform *= getTransform();
-
-	// Draw self & children
 	drawCurrent(target, states);
-	drawChildren(target, states);
+
+	// Draw children
+	for (const Ptr& child : mChildren) {
+		child->draw(target, states);
+	}
 }
 
 void SceneNode::drawCurrent(sf::RenderTarget& target, sf::RenderStates states) const {
 	//std::cout << "SceneNode.draw()" << std::endl;
-}
-
-void SceneNode::drawChildren(sf::RenderTarget& target, sf::RenderStates states) const {
-	for (const Ptr& child : mChildren) {
-		child->draw(target, states);
-	}
 }
 
 void SceneNode::attachChild(Ptr child) {
@@ -95,4 +91,22 @@ sf::Transform SceneNode::getWorldTransform() const {
 sf::Vector2f SceneNode::getWorldPosition() const {
 	//std::cout << "start: SceneNode.getWorldPosition()" << std::endl;
 	return getWorldTransform() * sf::Vector2f();
+}
+
+// Command Definitions
+Command::Command() {}
+
+// CommandQueue Definitions
+void CommandQueue::push(const Command& command) {
+	mQueue.push(command);
+}
+
+Command CommandQueue::pop() {
+	Command return_value = mQueue.front();
+	mQueue.pop();	// Apparently doesn't return anything
+	return return_value;
+}
+
+bool CommandQueue::isEmpty() const {
+	return mQueue.empty();
 }
