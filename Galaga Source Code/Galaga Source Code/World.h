@@ -1,8 +1,14 @@
 #ifndef World_h
 #define World_h
-//#include "Aircraft.h"
-#include "Player.h"
+#include "SceneNode.h"
+#include "SpriteNode.h"
+#include "Aircraft.h"
+#include "CommandQueue.h"
+#include "Command.h"
 #include <array>
+#include <queue>
+#include <algorithm>
+#include <cmath>
 
 class World;
 

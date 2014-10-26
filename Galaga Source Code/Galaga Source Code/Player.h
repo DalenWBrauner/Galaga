@@ -1,7 +1,11 @@
 #ifndef Player_h
 #define Player_h
-//#include "Galaga.h"
 #include "Aircraft.h"
+#include "Command.h"
+#include "CommandQueue.h"
+#include <map>
+#include <string>
+#include <algorithm>
 
 class Player;
 
