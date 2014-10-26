@@ -49,6 +49,7 @@ void World::loadTextures() {
 }
 
 void World::prepareSpriteMap() {
+	// I'm pretty sure this is roughly where I want this to be
 	//std::cout << "AND THUS THE WORLD'S SPRITEMAP WAS PREPARED" << std::endl;
 
 	spriteMap[Aircraft::WhiteShip] = 1;
@@ -69,8 +70,6 @@ void World::prepareSpriteMap() {
 
 void World::buildScene() {
 	//std::cout << "AND THUS THE WORLD'S SCENE WAS BUILT" << std::endl;
-
-	// Initialize layers
 	for (std::size_t i = 0; i < LayerCount; ++i) {
 		SceneNode::Ptr layer(new SceneNode());
 		mSceneLayers[i] = layer.get();
@@ -78,7 +77,6 @@ void World::buildScene() {
 		mSceneGraph.attachChild(std::move(layer));
 	}
 
-	// Add player aircraft
 	std::unique_ptr<Aircraft> leader(new Aircraft(Aircraft::WhiteShip, mTexturePtr, spriteMapPtr, true));
 	mPlayerAircraft = leader.get();
 	mPlayerAircraft->setPosition(mSpawnPosition);
@@ -97,8 +95,6 @@ void World::buildScene() {
 }
 
 void World::invisibleWall() {
-	// This function takes the place of "adaptPlayerPosition()"
-
 	// This acts as an "invisible wall" to keep the player on the screen
 	sf::Vector2f position = mPlayerAircraft->getPosition();
 	sf::Vector2f velocity = mPlayerAircraft->getVelocity();

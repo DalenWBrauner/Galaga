@@ -10,7 +10,8 @@
 #ifndef Galaga_h
 #define Galaga_h
 #include "World.h"
-#include "Player.h"
+#include "State.h"
+//#include "Player.h"
 #include <sstream>
 
 class Galaga;
@@ -18,18 +19,22 @@ class Galaga;
 class Galaga {
 
 private:
+	// Player
 	Player mPlayer;
-	World mWorld;
-	sf::RenderWindow mWindow;
-	static const sf::Time TimePerFrame;
-	static const float PlayerSpeed;
 
-	// Text (Will be moved)
+	// World
+	World mWorld;
+
+	// Mechanics
+	sf::RenderWindow mWindow;
+	sf::Time TimePerFrame;
+
+	// Text
 	sf::Font font;
 	sf::Text SFXText;
 	sf::Text scoreDisplay;
 
-	// Audio (Will be moved)
+	// Audio
 	sf::SoundBuffer sbfCoin;
 	sf::SoundBuffer sbfCaptured;
 	sf::SoundBuffer sbfFiring;
@@ -45,19 +50,27 @@ private:
 	sf::Sound sfxStart;
 	sf::Sound sfxIntro;
 
-	// Score (Will be moved)
+	// Motion
+	float PlayerSpeed;
+
+	// Other
 	int yourScore;
 	int highScore;
 
-	void loadAssets();
-	void processInput();
+	// Class Methods
 	void handleGameInput();
+	void processEvents();
 	void update(sf::Time);
 	void render();
+	void loadAssets();
 
 public:
+	// Constructors
 	Galaga();
+
+	// Usage Methods
 	void run();
+
 };
 
 #endif
