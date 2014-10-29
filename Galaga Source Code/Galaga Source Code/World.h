@@ -1,10 +1,13 @@
 #ifndef World_h
 #define World_h
-//#include "Aircraft.h"
+#include "Aircraft.h"
+#include "SpriteNode.h"
+#include "CommandQueue.h"
 #include "Player.h"
+#include "ResourceHolder.h"
+#include <SFML/Graphics.hpp>
+#include <SFML/Audio.hpp>
 #include <array>
-
-class World;
 
 class World : private sf::NonCopyable {
 public:

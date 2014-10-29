@@ -13,8 +13,6 @@
 #include "State.h"
 #include <sstream>
 
-class Galaga;
-
 class Galaga {
 
 private:

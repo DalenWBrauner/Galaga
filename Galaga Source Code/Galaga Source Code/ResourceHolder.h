@@ -1,6 +1,5 @@
 #ifndef ResourceHolder_h
 #define ResourceHolder_h
-
 #include <map>
 #include <string>
 #include <memory> //For unique_ptr

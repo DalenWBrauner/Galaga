@@ -15,7 +15,6 @@ World::World(sf::RenderWindow& window)
 	loadTextures();
 	prepareSpriteMap();
 	buildScene();
-	//std::cout << "AND THUS THE WORLD WAS BORN" << std::endl;
 }
 
 void World::movePlayer(sf::Vector2f movement){
@@ -23,8 +22,7 @@ void World::movePlayer(sf::Vector2f movement){
 }
 
 void World::update(sf::Time dt) {
-	//std::cout << "AND THUS THE WORLD WAS UPDATED" << std::endl;
-
+	
 	// Forward commands to the scene graph
 	while (!mCommandQueue.isEmpty()) {
 		mSceneGraph.onCommand(mCommandQueue.pop(), dt);
@@ -35,13 +33,11 @@ void World::update(sf::Time dt) {
 }
 
 void World::draw() {
-	//std::cout << "AND THUS THE WORLD WAS DRAWN" << std::endl;
 	mWindow.setView(mWorldView);
 	mWindow.draw(mSceneGraph);
 }
 
 void World::loadTextures() {
-	//std::cout << "AND THUS THE WORLD'S TEXTURES WERE LOADED" << std::endl;
 	if (!mTexture.loadFromFile("../../Media/Sprite Sheet.png"))
 		throw std::runtime_error("Failed to load sprite sheet.");
 
@@ -50,8 +46,6 @@ void World::loadTextures() {
 
 void World::prepareSpriteMap() {
 	// I'm pretty sure this is roughly where I want this to be
-	//std::cout << "AND THUS THE WORLD'S SPRITEMAP WAS PREPARED" << std::endl;
-
 	spriteMap[Aircraft::WhiteShip] = 1;
 	spriteMap[Aircraft::RedShip] = 18;
 	spriteMap[Aircraft::DawnOwl] = 35;
@@ -69,7 +63,6 @@ void World::prepareSpriteMap() {
 }
 
 void World::buildScene() {
-	//std::cout << "AND THUS THE WORLD'S SCENE WAS BUILT" << std::endl;
 	for (std::size_t i = 0; i < LayerCount; ++i) {
 		SceneNode::Ptr layer(new SceneNode());
 		mSceneLayers[i] = layer.get();

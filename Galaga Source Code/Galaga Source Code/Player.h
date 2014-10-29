@@ -1,9 +1,8 @@
 #ifndef Player_h
 #define Player_h
-//#include "Galaga.h"
 #include "Aircraft.h"
-
-class Player;
+#include "CommandQueue.h"
+#include "EntityMover.h"
 
 class Player {
 public:

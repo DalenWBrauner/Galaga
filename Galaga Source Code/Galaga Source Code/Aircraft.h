@@ -4,8 +4,6 @@
 #include <memory>
 #include <map>
 
-class Aircraft;
-
 class Aircraft : public Entity {
 public:
 	enum			ShipType {
