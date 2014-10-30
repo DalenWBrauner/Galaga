@@ -1,5 +1,6 @@
 #ifndef ResourceHolder_h
 #define ResourceHolder_h
+#include "ResourceIDs.h"
 #include <map>
 #include <string>
 #include <memory> //For unique_ptr
