@@ -1,12 +1,13 @@
 #include "Aircraft.h"
 
 Aircraft::Aircraft(ShipType shipType,
-	std::shared_ptr<sf::Texture> mTexture,
+	TextureHolder mTextures,
 	std::shared_ptr<std::map<ShipType, int>> spriteMap,
 	bool isPlayer
 	) {
 	mShipType = shipType;
-	mSprite.setTexture(*mTexture);
+	sf::Texture mem = mTextures.get(Resource::Texture::SpriteSheet);
+	mSprite.setTexture(mem);
 	mSprite.setTextureRect(sf::IntRect(120, (*spriteMap)[mShipType], 16, 16));
 	mSprite.setScale(sf::Vector2f(2.f, 2.f));
 	mSprite.setOrigin(8, 8);

@@ -4,14 +4,17 @@
 template <typename ResourceType, typename Identifier>
 void ResourceHolder<ResourceType, Identifier>::load(Identifier whichOne, const std::string& filename) {
 
-	// Create it
-	std::unique_ptr<ResourceType> resource = new ResourceType();
-	// Load it
-	if (!resource.loadFromFile(filename)) {
+	const ResourceType blank_resource;
+	std::unique_ptr<ResourceType> resource;
+
+	// Move our blank resource into the unique_ptr
+	resource = std::make_unique<ResourceType> (std::move(blank_resource));
+	
+	if (!resource->loadFromFile(filename)) {			// Load it
 		throw std::runtime_error("ResourceHolder::load() Failed to load " + filename);
 	}
-	// Insert it
-	insertResource(whichOne, std::move(resource));
+	
+	insertResource(whichOne, std::move(resource));		// Insert it
 }
 
 // load(second parameter)
@@ -19,47 +22,37 @@ template <typename ResourceType, typename Identifier>
 template <typename Parameter>
 void ResourceHolder<ResourceType, Identifier>::load(Identifier whichOne, const std::string& filename, const Parameter& param2) {
 
-	// Create it
-	std::unique_ptr<ResourceType> resource(new ResourceType());
-	// Load it (with our second parameter)
-	if (!resource.loadFromFile(filename, param2))
-		throw std::runtime_error("ResourceHolder::load() Failed to load " + filename);
-	// Insert it
-	insertResource(whichOne, std::move(resource));
+	std::unique_ptr<ResourceType> resource(ResourceType());			// Create it
+	if (!resource.loadFromFile(filename, param2))					// Load it (w/ 2nd param)
+		throw std::runtime_error("ResourceHolder::load() Failed to load " + filename);		
+	
+	insertResource(whichOne, std::move(resource));					// Insert it
 }
 
 // get()
 template <typename ResourceType, typename Identifier>
 ResourceType& ResourceHolder<ResourceType, Identifier>::get(Identifier whichOne) {
 
-	// Grab the resource
-	auto found = mResourceMap.find(whichOne);
-	// Assure ourselves we received a resource
-	assert(found != mResourceMap.end());
-	// Return a pointer to the resource
-	return *found->second;
+	auto found = mResourceMap.find(whichOne);	// Grab the resource
+	assert(found != mResourceMap.end());		// Assure ourselves we received a resource
+	
+	return *found->second;						// Return a pointer to the resource
 }
 
 // const get()
 template <typename ResourceType, typename Identifier>
-const ResourceType& ResourceHolder<ResourceType, Identifier>::get(Identifier whichOne) {
+const ResourceType& ResourceHolder<ResourceType, Identifier>::get(Identifier whichOne) const {
 
-	// Grab the resource
-	auto found = mResourceMap.find(whichOne);
-	// Assure ourselves we received a resource
-	assert(found != mResourceMap.end());
-	// Return a pointer to the resource
-	return *found->second;
+	auto found = mResourceMap.find(whichOne);	// Grab the resource
+	assert(found != mResourceMap.end());		// Assure ourselves we received a resource
+	
+	return *found->second;						// Return a pointer to the resource
 }
-
 
 // insertResource()
 template <typename ResourceType, typename Identifier>
 void ResourceHolder<ResourceType, Identifier>::insertResource(Identifier whichOne, std::unique_ptr<ResourceType> resource) {
 
-	// Insert
-	//auto inserted = mResourceMap.insert(std::make_pair(id, std::move(resource)));
-	auto inserted = mResourceMap[whichOne] = std::move(resource);
-	// Check success
-	assert(inserted.second);
+	auto inserted = mResourceMap.insert(std::make_pair(whichOne, std::move(resource)));	// Insert
+	assert(inserted.second);															// Check success
 }

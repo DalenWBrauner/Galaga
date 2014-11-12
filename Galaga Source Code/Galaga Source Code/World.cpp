@@ -3,16 +3,18 @@
 World::World(sf::RenderWindow& window)
 	: mWindow(window)
 	, mWorldView(sf::Vector2f(0, 0), sf::Vector2f(512.f, 480.f))
-	, mTexture()
 	, mSceneGraph()
 	, mSceneLayers()
 	, mWorldBounds(0.f, 0.f, 512.f, 480.f)
 	, mSpawnPosition(mWorldBounds.width/2, 400.f)
 	, mPlayerAircraft(nullptr)
+	, mFonts()
+	, mTextures()
+	, mSounds()
 {
 	mBoundsOffset = 32;
 	mWorldView.setCenter(256, 240);
-	loadTextures();
+	loadResources();
 	prepareSpriteMap();
 	buildScene();
 }
@@ -37,11 +39,28 @@ void World::draw() {
 	mWindow.draw(mSceneGraph);
 }
 
-void World::loadTextures() {
-	if (!mTexture.loadFromFile("../../Media/Sprite Sheet.png"))
-		throw std::runtime_error("Failed to load sprite sheet.");
+void World::loadResources() {
+	loadFonts();
+	loadTextures();
+	loadSounds();
+}
 
-	mTexturePtr = std::make_shared<sf::Texture>(mTexture);
+void World::loadFonts() {
+	mFonts.load(Resource::Font::Galaga,				"../../Media/Galaga.ttf");
+}
+
+void World::loadTextures() {
+	mTextures.load(Resource::Texture::SpriteSheet,	"../../Media/Sprite Sheet.png");
+}
+
+void World::loadSounds() {
+	mSounds.load(Resource::Sound::Coin,				"../../Media/Coin.wav");
+	mSounds.load(Resource::Sound::Captured,			"../../Media/Fighter_Captured.wav");
+	mSounds.load(Resource::Sound::Firing,			"../../Media/Firing.wav");
+	mSounds.load(Resource::Sound::Incoming,			"../../Media/Flying_Enemy.wav");
+	mSounds.load(Resource::Sound::Destroyed,		"../../Media/Kill_Enemy.wav");
+	mSounds.load(Resource::Sound::Start,			"../../Media/Level_Start.wav");
+	mSounds.load(Resource::Sound::Intro,			"../../Media/Theme_Song.wav");
 }
 
 void World::prepareSpriteMap() {
@@ -69,12 +88,12 @@ void World::buildScene() {
 
 		mSceneGraph.attachChild(std::move(layer));
 	}
-
-	std::unique_ptr<Aircraft> leader(new Aircraft(Aircraft::WhiteShip, mTexturePtr, spriteMapPtr, true));
-	mPlayerAircraft = leader.get();
-	mPlayerAircraft->setPosition(mSpawnPosition);
-	mPlayerAircraft->setVelocity(0.f, 0.f);
-	mSceneLayers[Air]->attachChild(std::move(leader));
+	std::unique_ptr<Aircraft> leader = std::make_unique<Aircraft>(
+		Aircraft(Aircraft::WhiteShip, mTextures, spriteMapPtr, true));
+	//mPlayerAircraft = leader.get();
+	//mPlayerAircraft->setPosition(mSpawnPosition);
+	//mPlayerAircraft->setVelocity(0.f, 0.f);
+	//mSceneLayers[Air]->attachChild(std::move(leader));
 
 	/* Let's add some escorts!
 	std::unique_ptr<Aircraft> leftEscort(new Aircraft(Aircraft::RedShip, mTexturePtr, spriteMapPtr));

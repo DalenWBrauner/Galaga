@@ -18,7 +18,10 @@ public:
 	CommandQueue&		getCommandQueue();
 
 private:
+	void				loadResources();
+	void				loadFonts();
 	void				loadTextures();
+	void				loadSounds();
 	void				prepareSpriteMap();
 	void				buildScene();
 	void				invisibleWall();
@@ -37,10 +40,10 @@ private:
 	Aircraft*							mPlayerAircraft;
 	float								mBoundsOffset;
 	CommandQueue						mCommandQueue;
+	FontHolder							mFonts;
+	TextureHolder						mTextures;
+	SoundHolder							mSounds;
 
-	// Textures
-	sf::Texture mTexture;
-	std::shared_ptr<sf::Texture> mTexturePtr;
 	// Sprite Map
 	std::map<Aircraft::ShipType, int>	spriteMap;
 	std::shared_ptr<std::map<Aircraft::ShipType, int>> spriteMapPtr;

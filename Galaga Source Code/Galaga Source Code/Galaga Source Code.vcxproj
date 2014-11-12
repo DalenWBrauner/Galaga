@@ -182,6 +182,7 @@
     <ClInclude Include="Aircraft.h" />
     <ClInclude Include="Application.h" />
     <ClInclude Include="ResourceHolder.h" />
+    <ClInclude Include="ResourceIDs.h" />
     <ClInclude Include="SpriteNode.h" />
     <ClInclude Include="StateIdentifiers.h" />
     <ClInclude Include="State.h" />

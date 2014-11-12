@@ -1,6 +1,5 @@
 #ifndef Player_h
 #define Player_h
-#include "Aircraft.h"
 #include "CommandQueue.h"
 #include "EntityMover.h"
 

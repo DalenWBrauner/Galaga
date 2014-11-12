@@ -1,6 +1,7 @@
 #ifndef Aircraft_h
 #define Aircraft_h
 #include "Entity.h"
+#include "ResourceHolder.h"
 #include <memory>
 #include <map>
 
@@ -23,7 +24,7 @@ public:
 	};
 	explicit		Aircraft(
 		ShipType shipType,
-		std::shared_ptr<sf::Texture> mTexture,
+		TextureHolder mTextures,
 		std::shared_ptr<std::map<ShipType, int>> spriteMap,
 		bool isPlayer=false
 		);
