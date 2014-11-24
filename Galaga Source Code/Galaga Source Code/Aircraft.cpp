@@ -4,6 +4,8 @@
 Aircraft::Aircraft(ShipType shipType, sf::Sprite sprite) {
 	mShipType = shipType;
 	mSprite = sprite;
+	if (mShipType == Aircraft::PlayerShip)	{ mCategory = Category::PlayerAircraft; }
+	else									{ mCategory = Category::EnemyAircraft; }
 }
 
 void Aircraft::drawCurrent(sf::RenderTarget& target, sf::RenderStates states) const {
