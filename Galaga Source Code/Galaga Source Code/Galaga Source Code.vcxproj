@@ -192,6 +192,22 @@
     <ClInclude Include="World.h" />
     <ClInclude Include="SceneNode.h" />
   </ItemGroup>
+  <ItemGroup>
+    <Media Include="..\..\Media\Coin.wav" />
+    <Media Include="..\..\Media\Fighter_Captured.wav" />
+    <Media Include="..\..\Media\Firing.wav" />
+    <Media Include="..\..\Media\Flying_Enemy.wav" />
+    <Media Include="..\..\Media\Kill_Enemy.wav" />
+    <Media Include="..\..\Media\Level_Start.wav" />
+    <Media Include="..\..\Media\Theme_Song.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="..\..\Media\Effects.png" />
+    <Image Include="..\..\Media\Ships.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Font Include="..\..\Media\Galaga.ttf" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

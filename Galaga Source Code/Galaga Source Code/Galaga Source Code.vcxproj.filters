@@ -13,6 +13,15 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Resource Files\Textures">
+      <UniqueIdentifier>{2e571bff-09b2-4904-8965-3983f6f268a6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\Fonts">
+      <UniqueIdentifier>{f9a04f1a-9358-4ee6-b931-e98308fda40d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\Sounds">
+      <UniqueIdentifier>{09e34883-a75d-4ff0-8eef-23254fce8054}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Galaga.cpp">
@@ -104,5 +113,41 @@
     <ClInclude Include="AircraftFactory.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Media Include="..\..\Media\Theme_Song.wav">
+      <Filter>Resource Files\Sounds</Filter>
+    </Media>
+    <Media Include="..\..\Media\Coin.wav">
+      <Filter>Resource Files\Sounds</Filter>
+    </Media>
+    <Media Include="..\..\Media\Fighter_Captured.wav">
+      <Filter>Resource Files\Sounds</Filter>
+    </Media>
+    <Media Include="..\..\Media\Firing.wav">
+      <Filter>Resource Files\Sounds</Filter>
+    </Media>
+    <Media Include="..\..\Media\Flying_Enemy.wav">
+      <Filter>Resource Files\Sounds</Filter>
+    </Media>
+    <Media Include="..\..\Media\Kill_Enemy.wav">
+      <Filter>Resource Files\Sounds</Filter>
+    </Media>
+    <Media Include="..\..\Media\Level_Start.wav">
+      <Filter>Resource Files\Sounds</Filter>
+    </Media>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="..\..\Media\Effects.png">
+      <Filter>Resource Files\Textures</Filter>
+    </Image>
+    <Image Include="..\..\Media\Ships.png">
+      <Filter>Resource Files\Textures</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <Font Include="..\..\Media\Galaga.ttf">
+      <Filter>Resource Files\Fonts</Filter>
+    </Font>
   </ItemGroup>
 </Project>
