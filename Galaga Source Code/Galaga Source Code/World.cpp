@@ -15,8 +15,8 @@ World::World(sf::RenderWindow& window)
 {
 	mBoundsOffset = 32;
 	mWorldView.setCenter(256, 240);
+
 	loadResources();
-	prepareSpriteMap();
 	buildScene();
 }
 
@@ -31,7 +31,8 @@ void World::loadFonts() {
 }
 
 void World::loadTextures() {
-	mTextures.load(Resource::Texture::SpriteSheet,	"../../Media/Sprite Sheet.png");
+	mTextures.load(Resource::Texture::Ships,		"../../Media/Ships.png");
+	mTextures.load(Resource::Texture::Effects,		"../../Media/Effects.png");
 }
 
 void World::loadSounds() {
@@ -42,24 +43,6 @@ void World::loadSounds() {
 	mSounds.load(Resource::Sound::Destroyed,		"../../Media/Kill_Enemy.wav");
 	mSounds.load(Resource::Sound::Start,			"../../Media/Level_Start.wav");
 	mSounds.load(Resource::Sound::Intro,			"../../Media/Theme_Song.wav");
-}
-
-void World::prepareSpriteMap() {
-	// I'm pretty sure this is roughly where I want this to be
-	spriteMap[Aircraft::WhiteShip] = 1;
-	spriteMap[Aircraft::RedShip] = 18;
-	spriteMap[Aircraft::DawnOwl] = 35;
-	spriteMap[Aircraft::DuskOwl] = 52;
-	spriteMap[Aircraft::Butterfly] = 69;
-	spriteMap[Aircraft::Wasp] = 86;
-	spriteMap[Aircraft::Pudding] = 103;
-	spriteMap[Aircraft::Scorpion] = 120;
-	spriteMap[Aircraft::Greenie] = 137;
-	spriteMap[Aircraft::Dragonfly] = 154;
-	spriteMap[Aircraft::Enterprise] = 171;
-	spriteMap[Aircraft::Petalcopter] = 188;
-
-	spriteMapPtr = std::make_shared<std::map<Aircraft::ShipType, int>>(spriteMap);
 }
 
 void World::buildScene() {
@@ -84,7 +67,7 @@ void World::buildScene() {
 	mPlayerAircraft->attachChild(std::move(leftEscort));
 
 	std::unique_ptr<Aircraft> rightEscort(
-		mAircraftFactory.newAircraft(Aircraft::Pudding));
+		mAircraftFactory.newAircraft(Aircraft::Enterprise));
 	rightEscort->setPosition(80.f, 50.f);
 	mPlayerAircraft->attachChild(std::move(rightEscort));
 	*/

@@ -47,10 +47,6 @@ private:
 
 	AircraftFactory						mAircraftFactory;
 	Aircraft*							mPlayerAircraft;
-
-	// Sprite Map
-	std::map<Aircraft::ShipType, int>	spriteMap;
-	std::shared_ptr<std::map<Aircraft::ShipType, int>> spriteMapPtr;
 };
 
 #endif

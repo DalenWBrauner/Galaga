@@ -30,12 +30,15 @@ std::unique_ptr<Aircraft> AircraftFactory::newAircraft(Aircraft::ShipType shipTy
 
 	// Determines the sprite based on the shiptype
 	sf::Sprite sprite;
-	sprite.setTexture(mTextures->get(Resource::Texture::SpriteSheet));
-	sprite.setTextureRect(sf::IntRect(120, (mSpriteMap)[shipType], 16, 16));
+	sprite.setTexture(mTextures->get(Resource::Texture::Ships));
+	sprite.setTextureRect(sf::IntRect(
+		103,						// Column 7
+		mSpriteMap[shipType],		// Row [shipType]
+		16,							// Sprite Width of 16px
+		16							// Sprite Height of 16px
+		));
 	sprite.setScale(sf::Vector2f(2.f, 2.f));
 	sprite.setOrigin(8, 8);
 
-	// http://stackoverflow.com/questions/4316727/returning-unique-ptr-from-functions
-	//std::unique_ptr<Aircraft> p = std::unique_ptr<Aircraft>(new Aircraft(shipType, sprite));
 	return std::unique_ptr<Aircraft>(new Aircraft(shipType, sprite));
 }

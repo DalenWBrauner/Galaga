@@ -13,7 +13,8 @@ namespace Resource {
 		Galaga,
 	};
 	enum Texture {
-		SpriteSheet,
+		Ships,
+		Effects,
 	};
 	enum Sound {
 		Coin,
