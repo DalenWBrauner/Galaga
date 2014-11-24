@@ -19,26 +19,6 @@ World::World(sf::RenderWindow& window)
 	buildScene();
 }
 
-void World::movePlayer(sf::Vector2f movement){
-	mPlayerAircraft->setVelocity(movement);
-}
-
-void World::update(sf::Time dt) {
-	
-	// Forward commands to the scene graph
-	while (!mCommandQueue.isEmpty()) {
-		mSceneGraph.onCommand(mCommandQueue.pop(), dt);
-	}
-
-	invisibleWall();
-	mSceneGraph.update(dt);
-}
-
-void World::draw() {
-	mWindow.setView(mWorldView);
-	mWindow.draw(mSceneGraph);
-}
-
 void World::loadResources() {
 	loadFonts();
 	loadTextures();
@@ -106,6 +86,25 @@ void World::buildScene() {
 	mPlayerAircraft->attachChild(std::move(rightEscort));
 }
 
+CommandQueue& World::getCommandQueue() {
+	return mCommandQueue;
+}
+
+void World::movePlayer(sf::Vector2f movement){
+	mPlayerAircraft->setVelocity(movement);
+}
+
+void World::update(sf::Time dt) {
+	
+	// Forward commands to the scene graph
+	while (!mCommandQueue.isEmpty()) {
+		mSceneGraph.onCommand(mCommandQueue.pop(), dt);
+	}
+
+	invisibleWall();
+	mSceneGraph.update(dt);
+}
+
 void World::invisibleWall() {
 	// This acts as an "invisible wall" to keep the player on the screen
 	sf::Vector2f position = mPlayerAircraft->getPosition();
@@ -123,6 +122,7 @@ void World::invisibleWall() {
 	mPlayerAircraft->setVelocity(velocity);
 }
 
-CommandQueue& World::getCommandQueue() {
-	return mCommandQueue;
+void World::draw() {
+	mWindow.setView(mWorldView);
+	mWindow.draw(mSceneGraph);
 }

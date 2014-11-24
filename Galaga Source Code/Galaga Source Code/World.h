@@ -39,6 +39,7 @@ private:
 	sf::Vector2f						mSpawnPosition;
 	Aircraft*							mPlayerAircraft;
 	float								mBoundsOffset;
+
 	CommandQueue						mCommandQueue;
 	FontHolder							mFonts;
 	TextureHolder						mTextures;
