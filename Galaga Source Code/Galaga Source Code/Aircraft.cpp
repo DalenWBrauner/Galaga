@@ -7,8 +7,7 @@ Aircraft::Aircraft(ShipType shipType,
 	bool isPlayer
 	) {
 	mShipType = shipType;
-	sf::Texture mem = mTextures->get(Resource::Texture::SpriteSheet);
-	mSprite.setTexture(mem);
+	mSprite.setTexture(mTextures->get(Resource::Texture::SpriteSheet));
 	mSprite.setTextureRect(sf::IntRect(120, (*spriteMap)[mShipType], 16, 16));
 	mSprite.setScale(sf::Vector2f(2.f, 2.f));
 	mSprite.setOrigin(8, 8);
