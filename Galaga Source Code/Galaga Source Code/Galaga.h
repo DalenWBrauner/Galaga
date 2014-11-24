@@ -12,6 +12,7 @@
 #include "World.h"
 #include "State.h"
 #include <sstream>
+#include <string>
 
 class Galaga {
 
@@ -34,6 +35,7 @@ private:
 	// Text
 	sf::Font font;
 	sf::Text SFXText;
+	sf::Text scoreText;
 	sf::Text scoreDisplay;
 
 	// Audio

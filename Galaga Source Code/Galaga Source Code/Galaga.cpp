@@ -10,7 +10,7 @@ Galaga::Galaga()
 	loadAssets();
 	TimePerFrame = sf::seconds(1.f / 60.f);
 	yourScore = 0;
-	highScore = 0;	//Temporary
+	highScore = 9900;	//Temporary
 
 	// Prepare SFX
 	sfxCoin.setBuffer(sbfCoin);
@@ -28,11 +28,17 @@ Galaga::Galaga()
 	SFXText.setPosition(25, 50);
 	SFXText.setString("SFX:\nQ: Intro\nW: Start\nE: Incoming\nR: Firing\nT: Destroyed\nY: Coin\nU: Captured");
 
+	scoreText.setFont(font);
+	scoreText.setCharacterSize(15);
+	scoreText.setColor(sf::Color::Red);
+	scoreText.setPosition(400, 50);
+	scoreText.setString("High\n Score\n\n\n\n1UP\n");
+
 	scoreDisplay.setFont(font);
 	scoreDisplay.setCharacterSize(15);
-	scoreDisplay.setColor(sf::Color::Red);
-	scoreDisplay.setPosition(400, 50);
-	scoreDisplay.setString("High\n Score\n\n\n\n1UP");
+	scoreDisplay.setColor(sf::Color::White);
+	scoreDisplay.setPosition(scoreText.getPosition());
+	scoreDisplay.setString("\n\n" + std::to_string(highScore) + "\n\n\n\n" + std::to_string(yourScore));
 }
 
 void Galaga::loadAssets() {
@@ -58,7 +64,7 @@ void Galaga::loadAssets() {
 
 void Galaga::handleGameInput() {
 	// For handling input unrelated to the player object.
-	if		(sf::Keyboard::isKeyPressed(sf::Keyboard::Q)) {
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Q)) {
 		sfxIntro.play();
 	}
 	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::W)) {
@@ -78,6 +84,16 @@ void Galaga::handleGameInput() {
 	}
 	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::U)) {
 		sfxCaptured.play();
+	}
+	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Equal)) {
+		yourScore++;
+		if (yourScore > highScore)
+			highScore = yourScore;
+	}
+	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Dash)) {
+		yourScore--;
+		if (yourScore > highScore)
+			highScore = yourScore;
 	}
 }
 
@@ -119,9 +135,7 @@ void Galaga::update(sf::Time deltaTime) {
 	mWorld.update(deltaTime);
 	
 	// Keeping Score
-//	std::stringstream scoreText;
-//	scoreText << "High\n Score\n" << highscore << "\nYour\n Score\n" << yourscore;
-//	scoreDisplay.setString(scoreText.str());
+	scoreDisplay.setString("\n\n" + std::to_string(highScore) + "\n\n\n\n" + std::to_string(yourScore));
 }
 
 void Galaga::render() {
@@ -130,6 +144,7 @@ void Galaga::render() {
 
 	mWorld.draw();
 	mWindow.draw(SFXText);
+	mWindow.draw(scoreText);
 	mWindow.draw(scoreDisplay);
 
 	mWindow.display();
