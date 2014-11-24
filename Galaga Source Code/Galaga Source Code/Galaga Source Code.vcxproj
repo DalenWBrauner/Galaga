@@ -166,7 +166,6 @@
     <ClCompile Include="Galaga.cpp" />
     <ClCompile Include="Entity.cpp" />
     <ClCompile Include="Aircraft.cpp" />
-    <ClCompile Include="ResourceHolder.inl" />
     <ClCompile Include="SceneNode.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Application.cpp" />
