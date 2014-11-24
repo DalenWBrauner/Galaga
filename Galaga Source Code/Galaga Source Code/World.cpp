@@ -11,6 +11,7 @@ World::World(sf::RenderWindow& window)
 	, mFonts()
 	, mTextures()
 	, mSounds()
+	, mAircraftFactory(&mTextures)
 {
 	mBoundsOffset = 32;
 	mWorldView.setCenter(256, 240);
@@ -68,9 +69,9 @@ void World::buildScene() {
 
 		mSceneGraph.attachChild(std::move(layer));
 	}
+	
 	std::unique_ptr<Aircraft> leader(
-		new Aircraft(Aircraft::WhiteShip, &mTextures, spriteMapPtr, true));
-	//Aircraft leader = Aircraft(Aircraft::WhiteShip, &mTextures, spriteMapPtr, true);
+		mAircraftFactory.newAircraft(Aircraft::PlayerShip));
 	mPlayerAircraft = leader.get();
 	mPlayerAircraft->setPosition(mSpawnPosition);
 	mPlayerAircraft->setVelocity(0.f, 0.f);

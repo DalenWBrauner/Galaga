@@ -1,6 +1,7 @@
 #ifndef World_h
 #define World_h
 #include "Aircraft.h"
+#include "AircraftFactory.h"
 #include "SpriteNode.h"
 #include "CommandQueue.h"
 #include "Player.h"
@@ -37,13 +38,15 @@ private:
 	std::array<SceneNode*, LayerCount>	mSceneLayers;
 	sf::FloatRect						mWorldBounds;
 	sf::Vector2f						mSpawnPosition;
-	Aircraft*							mPlayerAircraft;
 	float								mBoundsOffset;
 
 	CommandQueue						mCommandQueue;
 	FontHolder							mFonts;
 	TextureHolder						mTextures;
 	SoundHolder							mSounds;
+
+	AircraftFactory						mAircraftFactory;
+	Aircraft*							mPlayerAircraft;
 
 	// Sprite Map
 	std::map<Aircraft::ShipType, int>	spriteMap;

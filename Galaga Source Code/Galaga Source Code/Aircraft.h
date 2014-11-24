@@ -7,8 +7,11 @@
 
 class Aircraft : public Entity {
 public:
+	// ShipType determines behavior.
 	enum			ShipType {
-//		EnemyName	 // Line # on Sprite Sheet
+		// ShipTypes with unique behaviors.
+		PlayerShip,
+		// Standard enemy ships; described based upon appearance.
 		WhiteShip,	 // Line 1
 		RedShip,	 // Line 2
 		DawnOwl,	 // Line 3
@@ -22,12 +25,7 @@ public:
 		Enterprise,	 // Line 11
 		Petalcopter, // Line 12	
 	};
-	explicit		Aircraft(
-		ShipType shipType,
-		TextureHolder *mTextures,
-		std::shared_ptr<std::map<ShipType, int>> spriteMap,
-		bool isPlayer=false
-		);
+	explicit		Aircraft(ShipType shipType, sf::Sprite sprite);
 	virtual void	drawCurrent(sf::RenderTarget& target, sf::RenderStates states) const;
 
 private:
