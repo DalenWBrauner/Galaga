@@ -88,22 +88,22 @@ void World::buildScene() {
 
 		mSceneGraph.attachChild(std::move(layer));
 	}
-	std::unique_ptr<Aircraft> leader = std::make_unique<Aircraft>(
-		Aircraft(Aircraft::WhiteShip, mTextures, spriteMapPtr, true));
-	//mPlayerAircraft = leader.get();
-	//mPlayerAircraft->setPosition(mSpawnPosition);
-	//mPlayerAircraft->setVelocity(0.f, 0.f);
-	//mSceneLayers[Air]->attachChild(std::move(leader));
+	std::unique_ptr<Aircraft> leader(
+		new Aircraft(Aircraft::WhiteShip, &mTextures, spriteMapPtr, true));
+	//Aircraft leader = Aircraft(Aircraft::WhiteShip, &mTextures, spriteMapPtr, true);
+	mPlayerAircraft = leader.get();
+	mPlayerAircraft->setPosition(mSpawnPosition);
+	mPlayerAircraft->setVelocity(0.f, 0.f);
+	mSceneLayers[Air]->attachChild(std::move(leader));
 
-	/* Let's add some escorts!
-	std::unique_ptr<Aircraft> leftEscort(new Aircraft(Aircraft::RedShip, mTexturePtr, spriteMapPtr));
+	// Let's add some escorts!
+	std::unique_ptr<Aircraft> leftEscort(new Aircraft(Aircraft::RedShip, &mTextures, spriteMapPtr));
 	leftEscort->setPosition(-80.f, 50.f);
 	mPlayerAircraft->attachChild(std::move(leftEscort));
 
-	std::unique_ptr<Aircraft> rightEscort(new Aircraft(Aircraft::RedShip, mTexturePtr, spriteMapPtr));
+	std::unique_ptr<Aircraft> rightEscort(new Aircraft(Aircraft::RedShip, &mTextures, spriteMapPtr));
 	rightEscort->setPosition(80.f, 50.f);
 	mPlayerAircraft->attachChild(std::move(rightEscort));
-	*/
 }
 
 void World::invisibleWall() {

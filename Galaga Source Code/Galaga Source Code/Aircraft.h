@@ -24,7 +24,7 @@ public:
 	};
 	explicit		Aircraft(
 		ShipType shipType,
-		TextureHolder mTextures,
+		TextureHolder *mTextures,
 		std::shared_ptr<std::map<ShipType, int>> spriteMap,
 		bool isPlayer=false
 		);

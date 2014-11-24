@@ -1,10 +1,6 @@
 #ifndef ResourceIDs_h
 #define ResourceIDs_h
 
-// Forward Declaration
-template <typename ResourceType, typename Identifier>
-class ResourceHolder;
-
 namespace sf {
 	class Font;
 	class Texture;
@@ -29,6 +25,10 @@ namespace Resource {
 		Intro,
 	};
 };
+
+// Forward Declaration
+template <typename ResourceType, typename Identifier>
+class ResourceHolder;
 
 // Typedefs
 typedef ResourceHolder< sf::Font, Resource::Font>			FontHolder;

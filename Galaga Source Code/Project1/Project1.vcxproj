@@ -1,0 +1,113 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{DB2E7677-E8EE-491D-8FD4-800B504D878A}</ProjectGuid>
+    <RootNamespace>Project1</RootNamespace>
+    <ProjectName>Chapter_4 Input</ProjectName>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v120</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v120</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup />
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>C:\SFML\SFML-2.1\include;C:\Users\Dalen\Documents\GitHub\SFML-Game-Development-Book\04_Input\</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>sfml-audio-d.lib;sfml-graphics-d.lib;sfml-window-d.lib;sfml-system-d.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>C:\SFML\SFML-2.1\lib</AdditionalLibraryDirectories>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\SFML-Game-Development-Book\04_Input\Source\Aircraft.cpp" />
+    <ClCompile Include="..\..\..\SFML-Game-Development-Book\04_Input\Source\Command.cpp" />
+    <ClCompile Include="..\..\..\SFML-Game-Development-Book\04_Input\Source\CommandQueue.cpp" />
+    <ClCompile Include="..\..\..\SFML-Game-Development-Book\04_Input\Source\Entity.cpp" />
+    <ClCompile Include="..\..\..\SFML-Game-Development-Book\04_Input\Source\Game.cpp" />
+    <ClCompile Include="..\..\..\SFML-Game-Development-Book\04_Input\Source\Main.cpp" />
+    <ClCompile Include="..\..\..\SFML-Game-Development-Book\04_Input\Source\Player.cpp" />
+    <ClCompile Include="..\..\..\SFML-Game-Development-Book\04_Input\Source\SceneNode.cpp" />
+    <ClCompile Include="..\..\..\SFML-Game-Development-Book\04_Input\Source\SpriteNode.cpp" />
+    <ClCompile Include="..\..\..\SFML-Game-Development-Book\04_Input\Source\World.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Font Include="..\..\..\SFML-Game-Development-Book\04_Input\Media\Sansation.ttf" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="..\..\..\SFML-Game-Development-Book\04_Input\Media\Textures\Desert.png" />
+    <Image Include="..\..\..\SFML-Game-Development-Book\04_Input\Media\Textures\Eagle.png" />
+    <Image Include="..\..\..\SFML-Game-Development-Book\04_Input\Media\Textures\Raptor.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\SFML-Game-Development-Book\04_Input\Include\Book\Aircraft.hpp" />
+    <ClInclude Include="..\..\..\SFML-Game-Development-Book\04_Input\Include\Book\Category.hpp" />
+    <ClInclude Include="..\..\..\SFML-Game-Development-Book\04_Input\Include\Book\Command.hpp" />
+    <ClInclude Include="..\..\..\SFML-Game-Development-Book\04_Input\Include\Book\CommandQueue.hpp" />
+    <ClInclude Include="..\..\..\SFML-Game-Development-Book\04_Input\Include\Book\Entity.hpp" />
+    <ClInclude Include="..\..\..\SFML-Game-Development-Book\04_Input\Include\Book\Foreach.hpp" />
+    <ClInclude Include="..\..\..\SFML-Game-Development-Book\04_Input\Include\Book\Game.hpp" />
+    <ClInclude Include="..\..\..\SFML-Game-Development-Book\04_Input\Include\Book\Player.hpp" />
+    <ClInclude Include="..\..\..\SFML-Game-Development-Book\04_Input\Include\Book\ResourceHolder.hpp" />
+    <ClInclude Include="..\..\..\SFML-Game-Development-Book\04_Input\Include\Book\ResourceIdentifiers.hpp" />
+    <ClInclude Include="..\..\..\SFML-Game-Development-Book\04_Input\Include\Book\SceneNode.hpp" />
+    <ClInclude Include="..\..\..\SFML-Game-Development-Book\04_Input\Include\Book\SpriteNode.hpp" />
+    <ClInclude Include="..\..\..\SFML-Game-Development-Book\04_Input\Include\Book\StringHelpers.hpp" />
+    <ClInclude Include="..\..\..\SFML-Game-Development-Book\04_Input\Include\Book\World.hpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\..\SFML-Game-Development-Book\04_Input\Include\Book\ResourceHolder.inl" />
+    <None Include="..\..\..\SFML-Game-Development-Book\04_Input\Include\Book\StringHelpers.inl" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

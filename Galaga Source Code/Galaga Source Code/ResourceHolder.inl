@@ -4,12 +4,13 @@
 template <typename ResourceType, typename Identifier>
 void ResourceHolder<ResourceType, Identifier>::load(Identifier whichOne, const std::string& filename) {
 
-	const ResourceType blank_resource;
-	std::unique_ptr<ResourceType> resource;
+	//const ResourceType blank_resource;
+	//std::unique_ptr<ResourceType> resource;
 
 	// Move our blank resource into the unique_ptr
-	resource = std::make_unique<ResourceType> (std::move(blank_resource));
-	
+	//resource = std::make_unique<ResourceType> (std::move(blank_resource));
+
+	std::unique_ptr<ResourceType> resource(new ResourceType());
 	if (!resource->loadFromFile(filename)) {			// Load it
 		throw std::runtime_error("ResourceHolder::load() Failed to load " + filename);
 	}
@@ -22,7 +23,7 @@ template <typename ResourceType, typename Identifier>
 template <typename Parameter>
 void ResourceHolder<ResourceType, Identifier>::load(Identifier whichOne, const std::string& filename, const Parameter& param2) {
 
-	std::unique_ptr<ResourceType> resource(ResourceType());			// Create it
+	std::unique_ptr<ResourceType> resource(new ResourceType());		// Create it
 	if (!resource.loadFromFile(filename, param2))					// Load it (w/ 2nd param)
 		throw std::runtime_error("ResourceHolder::load() Failed to load " + filename);		
 	

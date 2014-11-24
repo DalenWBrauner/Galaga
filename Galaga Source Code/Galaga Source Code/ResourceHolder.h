@@ -22,8 +22,10 @@ public:
 	const ResourceType&		get(Identifier whichOne) const;
 
 private:
-	std::map<Identifier, std::unique_ptr<ResourceType>>		mResourceMap;
 	void					insertResource(Identifier whichOne, std::unique_ptr<ResourceType> resource);
+	std::map<Identifier, std::unique_ptr<ResourceType>>	mResourceMap;
+	
 };
 
+#include "ResourceHolder.inl"
 #endif
