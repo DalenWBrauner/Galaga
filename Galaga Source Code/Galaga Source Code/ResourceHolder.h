@@ -32,18 +32,11 @@ private:
 template <typename ResourceType, typename Identifier>
 void ResourceHolder<ResourceType, Identifier>::load(Identifier whichOne, const std::string& filename) {
 
-	//const ResourceType blank_resource;
-	//std::unique_ptr<ResourceType> resource;
-
-	// Move our blank resource into the unique_ptr
-	//resource = std::make_unique<ResourceType> (std::move(blank_resource));
-
-	std::unique_ptr<ResourceType> resource(new ResourceType());
-	if (!resource->loadFromFile(filename)) {			// Load it
+	std::unique_ptr<ResourceType> resource(new ResourceType());		// Create it
+	if (!resource->loadFromFile(filename))							// Load it
 		throw std::runtime_error("ResourceHolder::load() Failed to load " + filename);
-	}
 
-	insertResource(whichOne, std::move(resource));		// Insert it
+	insertResource(whichOne, std::move(resource));					// Insert it
 }
 
 // load(2nd parameter)
