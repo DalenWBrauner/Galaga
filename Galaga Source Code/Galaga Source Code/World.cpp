@@ -78,11 +78,13 @@ void World::buildScene() {
 	mSceneLayers[Air]->attachChild(std::move(leader));
 
 	/* Let's add some escorts!
-	std::unique_ptr<Aircraft> leftEscort(new Aircraft(Aircraft::RedShip, &mTextures, spriteMapPtr));
+	std::unique_ptr<Aircraft> leftEscort(
+		mAircraftFactory.newAircraft(Aircraft::Wasp));
 	leftEscort->setPosition(-80.f, 50.f);
 	mPlayerAircraft->attachChild(std::move(leftEscort));
 
-	std::unique_ptr<Aircraft> rightEscort(new Aircraft(Aircraft::RedShip, &mTextures, spriteMapPtr));
+	std::unique_ptr<Aircraft> rightEscort(
+		mAircraftFactory.newAircraft(Aircraft::Pudding));
 	rightEscort->setPosition(80.f, 50.f);
 	mPlayerAircraft->attachChild(std::move(rightEscort));
 	*/
