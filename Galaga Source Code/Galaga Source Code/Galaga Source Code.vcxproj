@@ -185,7 +185,7 @@
     <ClInclude Include="ResourceHolder.h" />
     <ClInclude Include="ResourceIDs.h" />
     <ClInclude Include="SpriteNode.h" />
-    <ClInclude Include="StateIdentifiers.h" />
+    <ClInclude Include="StateIDs.h" />
     <ClInclude Include="State.h" />
     <ClInclude Include="StateStack.h" />
     <ClInclude Include="Player.h" />

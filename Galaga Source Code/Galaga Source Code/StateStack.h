@@ -1,9 +1,13 @@
-/*
 #ifndef StateStack_h
 #define StateStack_h
-#include "StateIdentifiers.h"
 #include "State.h"
+#include "StateIDs.h"
+#include "ResourceIDs.h"
 #include "Galaga.h"
+#include <vector>
+#include <utility>
+#include <functional>
+#include <map>
 
 class StateStack : private sf::NonCopyable {
 public:
@@ -33,7 +37,7 @@ private:
 	void				applyPendingChanges();
 
 	struct PendingChange {
-		// ...
+		explicit		PendingChange(Action action, States::ID stateID = States::None);
 		Action			action;
 		States::ID		stateID;
 	};
@@ -46,4 +50,3 @@ private:
 };
 
 #endif
-*/

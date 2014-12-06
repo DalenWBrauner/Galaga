@@ -1,24 +1,35 @@
-/*
 #ifndef State_h
 #define State_h
+#include "StateIDs.h"
+#include "ResourceIDs.h"
+#include <memory>
+#include "SFML\System\Time.hpp"
+#include "SFML\Window\Event.hpp"
 
+// Forward Declarations
+namespace sf {
+	class RenderWindow;
+}
+class StateStack;
+class Player;
+
+// Class
 class State {
 public:
 	typedef std::unique_ptr<State> Ptr;
 
-	// Finish This
 	struct Context {
 		Context(
-			sf::RenderWindow& window,
-			//TextureHolder& textures,
-			//FontHolder& fonts,
-			//Player& player
+			sf::RenderWindow&	window,
+			TextureHolder&		textures,
+			FontHolder&			fonts,
+			Player&				player
 			);
 
 		sf::RenderWindow*	window;
-		//TextureHolder*	textures;
-		//FontHolder*			fonts;
-		//Player*				player;
+		TextureHolder*		textures;
+		FontHolder*			fonts;
+		Player*				player;
 	};
 
 	State(StateStack& stack, Context context);
@@ -31,7 +42,7 @@ public:
 protected:
 	void			requestStackPush(States::ID stateID);
 	void			requestStackPop();
-	void			requestStateClear();
+	void			requestStackClear();
 
 	Context			getContext() const;
 
@@ -41,4 +52,3 @@ private:
 };
 
 #endif
-*/
