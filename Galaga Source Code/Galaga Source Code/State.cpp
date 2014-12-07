@@ -6,6 +6,10 @@ State::Context::Context(
 	TextureHolder& textures,
 	FontHolder& fonts,
 	Player& player)
+	: window(&window)
+	, textures(&textures)
+	, fonts(&fonts)
+	, player(&player)
 {}
 
 State::State(StateStack& stack, Context context)

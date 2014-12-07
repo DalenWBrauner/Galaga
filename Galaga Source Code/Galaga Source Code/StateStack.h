@@ -19,7 +19,7 @@ public:
 
 	explicit			StateStack(State::Context context);
 
-	template <typename T>
+	template <typename someState>
 	void				registerState(States::ID stateID);
 
 	void				update(sf::Time dt);
@@ -48,5 +48,14 @@ private:
 	std::map < States::ID,
 		std::function < State::Ptr() >> mFactories;
 };
+
+// I need to research why this is necessary
+template <typename someState>
+void StateStack::registerState(States::ID stateID) {
+	// Stores a factory for the respective state in mFactories
+	mFactories[stateID] = [this]() {
+		return State::Ptr(new someState(*this, mContext));
+	};
+}
 
 #endif

@@ -166,11 +166,17 @@
     <ClCompile Include="Galaga.cpp" />
     <ClCompile Include="Entity.cpp" />
     <ClCompile Include="Aircraft.cpp" />
+    <ClCompile Include="MenuState.cpp" />
+    <ClCompile Include="PauseState.cpp" />
     <ClCompile Include="SceneNode.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Application.cpp" />
+    <ClCompile Include="GameState.cpp" />
+    <ClCompile Include="ScoreState.cpp" />
+    <ClCompile Include="StarryState.cpp" />
     <ClCompile Include="State.cpp" />
     <ClCompile Include="StateStack.cpp" />
+    <ClCompile Include="TitleState.cpp" />
     <ClCompile Include="World.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -182,13 +188,19 @@
     <ClInclude Include="Aircraft.h" />
     <ClInclude Include="Application.h" />
     <ClInclude Include="AircraftFactory.h" />
+    <ClInclude Include="GameState.h" />
+    <ClInclude Include="MenuState.h" />
+    <ClInclude Include="PauseState.h" />
     <ClInclude Include="ResourceHolder.h" />
     <ClInclude Include="ResourceIDs.h" />
+    <ClInclude Include="ScoreState.h" />
     <ClInclude Include="SpriteNode.h" />
+    <ClInclude Include="StarryState.h" />
     <ClInclude Include="StateIDs.h" />
     <ClInclude Include="State.h" />
     <ClInclude Include="StateStack.h" />
     <ClInclude Include="Player.h" />
+    <ClInclude Include="TitleState.h" />
     <ClInclude Include="World.h" />
     <ClInclude Include="SceneNode.h" />
   </ItemGroup>

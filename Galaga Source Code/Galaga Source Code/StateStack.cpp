@@ -26,14 +26,6 @@ void StateStack::draw() {
 	}
 }
 
-template <typename T>
-void StateStack::registerState(States::ID stateID) {
-	// Stores a factory for the respective state in mFactories
-	mFactories[stateID] = [this]() {
-		return State::Ptr(new T(*this, mContext));
-	}
-}
-
 State::Ptr StateStack::createState(States::ID stateID) {
 	// Uses the appropriate mFactory to create a new state
 	auto found = mFactories.find(stateID);
@@ -81,6 +73,10 @@ void StateStack::popState() {
 
 void StateStack::clearStates() {
 	mPendingList.push_back(PendingChange(Clear));
+}
+
+bool StateStack::isEmpty() const {
+	return mStack.empty();
 }
 
 StateStack::PendingChange::PendingChange(Action action, States::ID stateID)

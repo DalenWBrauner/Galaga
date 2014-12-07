@@ -13,6 +13,7 @@ namespace Resource {
 		Galaga,
 	};
 	enum Texture {
+		Title,
 		Ships,
 		Effects,
 	};

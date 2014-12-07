@@ -4,9 +4,13 @@
 namespace States {
 	enum ID {
 		None,
+		Starry,
+		Title,
+		Menu,
+		Scoreboard,
 		Game,
-		Example1,
-		Example2,
+		Pause,
+		Loading,
 	};
 };
 

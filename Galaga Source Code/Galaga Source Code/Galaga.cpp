@@ -1,4 +1,5 @@
 #include "Galaga.h"
+#include "Application.h"
 
 const float Galaga::PlayerSpeed = 10000.0f; // It's really strange this number is so high
 
@@ -179,7 +180,8 @@ void Galaga::run() {
 
 int main() {
 	try {
-		Galaga the_game;
+		//Galaga the_game;
+		Application the_game;
 		the_game.run();
 	}
 	catch (std::exception& e) {
