@@ -1,5 +1,6 @@
 #include "ScoreState.h"
 #include "ResourceHolder.h"
+#include "Utility.h"
 #include "SFML/Graphics/RenderWindow.hpp"
 
 ScoreState::ScoreState(StateStack& stack, Context context)
@@ -9,7 +10,7 @@ ScoreState::ScoreState(StateStack& stack, Context context)
 {
 	mExitText.setFont(context.fonts->get(Resource::Font::Galaga));
 	mExitText.setString("(Press any key to return to the Main Menu)");
-	//centerOrigin(mExitText);
+	centerOrigin(mExitText);
 	mExitText.setPosition(context.window->getView().getSize() / 2.f);
 
 	loadScores();

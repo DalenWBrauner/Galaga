@@ -1,5 +1,6 @@
 #include "PauseState.h"
 #include "ResourceHolder.h"
+#include "Utility.h"
 #include "SFML/Graphics/RectangleShape.hpp"
 #include "SFML/Graphics/RenderWindow.hpp"
 #include "SFML/Graphics/View.hpp"
@@ -15,12 +16,12 @@ PauseState::PauseState(StateStack& stack, Context context)
 	mPausedText.setFont(font);
 	mPausedText.setString("PAUSED");
 	mPausedText.setCharacterSize(64);
-	//centerOrigin(mPausedText);
+	centerOrigin(mPausedText);
 	mPausedText.setPosition(0.5f * viewSize.x, 0.4f * viewSize.y);
 
 	mInstructionText.setFont(font);
 	mInstructionText.setString("Press Backspace to return to Main Menu");
-	//centerOrigin(mInstructionText);
+	centerOrigin(mInstructionText);
 	mInstructionText.setPosition(0.5f * viewSize.x, 0.6f * viewSize.y);
 }
 

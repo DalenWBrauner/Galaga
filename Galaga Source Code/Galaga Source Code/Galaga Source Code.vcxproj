@@ -177,6 +177,7 @@
     <ClCompile Include="State.cpp" />
     <ClCompile Include="StateStack.cpp" />
     <ClCompile Include="TitleState.cpp" />
+    <ClCompile Include="Utility.cpp" />
     <ClCompile Include="World.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -201,6 +202,7 @@
     <ClInclude Include="StateStack.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="TitleState.h" />
+    <ClInclude Include="Utility.h" />
     <ClInclude Include="World.h" />
     <ClInclude Include="SceneNode.h" />
   </ItemGroup>

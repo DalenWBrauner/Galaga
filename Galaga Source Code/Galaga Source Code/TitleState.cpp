@@ -1,5 +1,6 @@
 #include "TitleState.h"
 #include "ResourceHolder.h"
+#include "Utility.h"
 #include "SFML/Graphics/RenderWindow.hpp"
 
 TitleState::TitleState(StateStack& stack, Context context)
@@ -12,7 +13,7 @@ TitleState::TitleState(StateStack& stack, Context context)
 
 	mText.setFont(context.fonts->get(Resource::Font::Galaga));
 	mText.setString("PRESS ANY KEY");
-	//centerOrigin(mText);
+	centerOrigin(mText);
 	mText.setPosition(context.window->getView().getSize() / 2.f);
 }
 
