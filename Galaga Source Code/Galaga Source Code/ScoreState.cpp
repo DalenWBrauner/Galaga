@@ -2,6 +2,7 @@
 #include "ResourceHolder.h"
 #include "Utility.h"
 #include "SFML/Graphics/RenderWindow.hpp"
+#include <iostream>
 
 ScoreState::ScoreState(StateStack& stack, Context context)
 	: State(stack, context)
@@ -12,6 +13,7 @@ ScoreState::ScoreState(StateStack& stack, Context context)
 	mExitText.setString("(Press any key to return to the Main Menu)");
 	centerOrigin(mExitText);
 	mExitText.setPosition(context.window->getView().getSize() / 2.f);
+	mExitText.setColor(sf::Color::Red);
 
 	loadScores();
 }
@@ -27,6 +29,7 @@ void ScoreState::draw() {
 }
 
 bool ScoreState::update(sf::Time dt) {
+	//std::cout << "Updating ScoreState" << std::endl;
 	return true;
 }
 
@@ -34,7 +37,7 @@ bool ScoreState::handleEvent(const sf::Event& event) {
 	// Check for any keypress
 	if (event.type == sf::Event::KeyPressed) {
 		requestStackPop();
-		requestStackPop();	// Need to pop StarryState
+		//requestStackPop();	// Need to pop StarryState
 	}
 	return true;
 }

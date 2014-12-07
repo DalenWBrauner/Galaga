@@ -16,12 +16,13 @@ public:
 	void				updateOptionText();
 
 private:
-	sf::Sprite			mTitleSprite;
+	void					addToMenu(sf::Vector2f viewSize, std::string text, float row);
+	sf::Sprite				mTitleSprite;
 	enum OptionNames {
 		SinglePlayer,
 		ScoreBoard,
-//		LocalMultiplayer,
-//		OnlineMultiplayer,
+		LocalMultiplayer,
+		OnlineMultiplayer,
 		Quit,
 	};
 	std::vector<sf::Text>	mOptions;

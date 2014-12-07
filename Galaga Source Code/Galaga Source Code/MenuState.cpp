@@ -1,37 +1,45 @@
 #include "MenuState.h"
 #include "ResourceHolder.h"
+#include "Utility.h"
 #include "SFML/Graphics/RenderWindow.hpp"
 #include "SFML/Graphics/View.hpp"
+#include <iostream>
 
 MenuState::MenuState(StateStack& stack, Context context)
 	: State(stack, context)
 	, mOptions()
 	, mOptionIndex(0)
 {
+	//sf::Font& font = context.fonts->get(Resource::Font::Galaga);
+	sf::Vector2f viewSize = context.window->getView().getSize();
+
 	mTitleSprite.setTexture(context.textures->get(Resource::Texture::Title));
+	centerOrigin(mTitleSprite);
+	mTitleSprite.setPosition(sf::Vector2f(
+		viewSize.x / 2.f,
+		viewSize.y / 2.f - 15.f - viewSize.y*.2f
+		));
 
-	sf::Font& font = context.fonts->get(Resource::Font::Galaga);
-
-	// Crude Menu Implementation
-	sf::Text optSinglePlayer;
-	optSinglePlayer.setFont(font);
-	optSinglePlayer.setString("Single Player");
-	optSinglePlayer.setPosition(context.window->getView().getSize() / 2.f);
-	mOptions.push_back(optSinglePlayer);
-
-	sf::Text optScore;
-	optScore.setFont(font);
-	optScore.setString("High Scores");
-	optSinglePlayer.setPosition(optSinglePlayer.getPosition() + sf::Vector2f(0.f, 30.f));
-	mOptions.push_back(optScore);
-
-	sf::Text optQuit;
-	optQuit.setFont(font);
-	optQuit.setString("Quit");
-	optSinglePlayer.setPosition(optScore.getPosition() + sf::Vector2f(0.f, 30.f));
-	mOptions.push_back(optQuit);
-
+	float menuItems = 0.f;
+	addToMenu(viewSize, "Single Player", menuItems++);
+	addToMenu(viewSize, "High Scores", menuItems++);
+	addToMenu(viewSize, "Local Multiplayer", menuItems++);
+	addToMenu(viewSize, "Online Multiplayer", menuItems++);
+	addToMenu(viewSize, "Quit", menuItems++);
 	updateOptionText();
+}
+
+void MenuState::addToMenu(sf::Vector2f viewSize, std::string text, float row) {
+	sf::Text option;
+	option.setFont(getContext().fonts->get(Resource::Font::Galaga));
+	option.setString(text);
+	option.setCharacterSize(20);
+	centerOrigin(option);
+	option.setPosition(sf::Vector2f(
+		viewSize.x / 2.f,
+		viewSize.y / 2.f + 5.f + viewSize.y*(row/10.f)
+		));
+	mOptions.push_back(option);
 }
 
 void MenuState::draw() {
@@ -44,6 +52,8 @@ void MenuState::draw() {
 }
 
 bool MenuState::update(sf::Time dt) {
+	//std::cout << "Updating MenuState" << std::endl;
+	updateOptionText();
 	return true;
 }
 
@@ -63,13 +73,11 @@ bool MenuState::handleEvent(const sf::Event& event) {
 			requestStackPush(States::Game);
 		}
 		else if (mOptionIndex == ScoreBoard) {
-			requestStackPush(States::Starry);
+			//requestStackPush(States::Starry);
 			requestStackPush(States::Scoreboard);
 		}
-		/*
 		else if (mOptionIndex == LocalMultiplayer) {}
 		else if (mOptionIndex == OnlineMultiplayer) {}
-		*/
 	}
 	else if (event.key.code == sf::Keyboard::Up) {
 		// Decrement

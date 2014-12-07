@@ -16,6 +16,11 @@ public:
 private:
 	World				mWorld;
 	Player&				mPlayer;
+	int yourScore;
+	int highScore;
+	sf::Text SFXText;
+	sf::Text scoreText;
+	sf::Text scoreDisplay;
 };
 
 #endif

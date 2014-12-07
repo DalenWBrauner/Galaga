@@ -12,7 +12,6 @@ const sf::Time Application::TimePerFrame = sf::seconds(1.f / 60.f);
 
 Application::Application()
 	: mWindow(sf::VideoMode(512, 480), "GALAGA")
-	, mCorrectView(sf::Vector2f(0, 0), sf::Vector2f(mWindow.getSize()))
 	, mTextures()
 	, mFonts()
 	, mPlayer()
@@ -31,7 +30,7 @@ Application::Application()
 	mStatisticsText.setCharacterSize(10u);
 
 	registerStates();
-	mStateStack.pushState(States::Starry);	// Start the aesthetic
+	//mStateStack.pushState(States::Starry);	// Start the aesthetic
 	mStateStack.pushState(States::Title);	// Let's get started!
 }
 
@@ -87,7 +86,7 @@ void Application::processInput() {
 void Application::render() {
 	mWindow.clear();
 	mStateStack.draw();
-	mWindow.setView(mCorrectView);
+	mWindow.setView(mWindow.getDefaultView());
 	mWindow.draw(mStatisticsText);	// Draw statistics absolutely last
 	mWindow.display();
 }

@@ -2,6 +2,7 @@
 #include "ResourceHolder.h"
 #include "Utility.h"
 #include "SFML/Graphics/RenderWindow.hpp"
+#include <iostream>
 
 TitleState::TitleState(StateStack& stack, Context context)
 	: State(stack, context)
@@ -9,12 +10,22 @@ TitleState::TitleState(StateStack& stack, Context context)
 	, mShowText(true)
 	, mTextEffectTime(sf::Time::Zero)
 {
+	sf::Vector2f viewSize = context.window->getView().getSize();
+
 	mTitleSprite.setTexture(context.textures->get(Resource::Texture::Title));
+	centerOrigin(mTitleSprite);
+	mTitleSprite.setPosition(sf::Vector2f(
+		viewSize.x/2.f,
+		viewSize.y/2.f - 15.f - viewSize.y*.2f
+		));
 
 	mText.setFont(context.fonts->get(Resource::Font::Galaga));
 	mText.setString("PRESS ANY KEY");
 	centerOrigin(mText);
-	mText.setPosition(context.window->getView().getSize() / 2.f);
+	mText.setPosition(sf::Vector2f(
+		viewSize.x / 2.f,
+		viewSize.y / 2.f + 1.f + viewSize.y*.25f
+		));
 }
 
 void TitleState::draw() {
@@ -25,10 +36,12 @@ void TitleState::draw() {
 }
 
 bool TitleState::update(sf::Time dt) {
+	//std::cout << "Updating TitleState" << std::endl;
+
 	mTextEffectTime += dt;
 
 	// Achieves the rapid-blinking effect for mText
-	if (mTextEffectTime >= sf::seconds(0.2f)) {
+	if (mTextEffectTime >= sf::seconds(0.9f)) {
 		mShowText = !mShowText;
 		mTextEffectTime = sf::Time::Zero;
 	}

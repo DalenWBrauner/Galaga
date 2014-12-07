@@ -1,6 +1,7 @@
 #include "StarryState.h"
 #include "ResourceHolder.h"
 #include "SFML/Graphics/RenderWindow.hpp"
+#include <iostream>
 
 StarryState::StarryState(StateStack& stack, Context context)
 	: State(stack, context)
@@ -9,13 +10,15 @@ StarryState::StarryState(StateStack& stack, Context context)
 
 void StarryState::draw() {
 	sf::RenderWindow& window = *getContext().window;
-	window.clear();		// Draw the night sky
+	//window.clear();		// Draw the night sky
 	for (sf::Sprite& star : mStars) {
 		window.draw(star);
 	}
 }
 
 bool StarryState::update(sf::Time dt) {
+	//std::cout << "Updating StarryState" << std::endl;
+
 	insertStarsRandomly();
 
 	for (sf::Sprite& star : mStars) {
