@@ -9,6 +9,8 @@ StarryState::StarryState(StateStack& stack, Context context)
 {}
 
 void StarryState::draw() {
+	//std::cout << "draw() StarryState" << std::endl;
+
 	sf::RenderWindow& window = *getContext().window;
 	//window.clear();		// Draw the night sky
 	for (sf::Sprite& star : mStars) {
@@ -17,7 +19,7 @@ void StarryState::draw() {
 }
 
 bool StarryState::update(sf::Time dt) {
-	//std::cout << "Updating StarryState" << std::endl;
+	//std::cout << "update() StarryState" << std::endl;
 
 	insertStarsRandomly();
 
@@ -31,7 +33,11 @@ bool StarryState::update(sf::Time dt) {
 }
 
 // StarryState pauses all states below
-bool StarryState::handleEvent(const sf::Event& event) { return false; }
+bool StarryState::handleEvent(const sf::Event& event) {
+	//std::cout << "handleEvent() StarryState" << std::endl;
+	
+	return false;
+}
 
 void StarryState::insertStarsRandomly() {
 	// Stars spawn above the playing field

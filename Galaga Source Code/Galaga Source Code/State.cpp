@@ -20,14 +20,17 @@ State::State(StateStack& stack, Context context)
 State::~State() {}
 
 void State::requestStackPush(States::ID stateID) {
+	//std::cout << "REQUESTING STACK PUSH" << std::endl;
 	mStack->pushState(stateID);
 }
 
 void State::requestStackPop() {
+	//std::cout << "REQUESTING STACK POP" << std::endl;
 	mStack->popState();
 }
 
 void State::requestStackClear() {
+	//std::cout << "REQUESTING STACK CLEAR" << std::endl;
 	mStack->clearStates();
 }
 

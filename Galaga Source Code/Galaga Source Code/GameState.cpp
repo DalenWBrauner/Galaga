@@ -25,6 +25,7 @@ GameState::GameState(StateStack& stack, Context context)
 }
 
 void GameState::draw() {
+	//std::cout << "draw() GameState" << std::endl;
 	sf::RenderWindow& window = *getContext().window;
 
 	mWorld.draw();
@@ -33,7 +34,7 @@ void GameState::draw() {
 }
 
 bool GameState::update(sf::Time dt) {
-	//std::cout << "Updating GameState" << std::endl;
+	//std::cout << "update() GameState" << std::endl;
 	mWorld.update(dt);
 
 	CommandQueue& commands = mWorld.getCommandQueue();
@@ -46,6 +47,7 @@ bool GameState::update(sf::Time dt) {
 }
 
 bool GameState::handleEvent(const sf::Event& event) {
+	//std::cout << "handleEvent() GameState" << std::endl;
 	CommandQueue& commands = mWorld.getCommandQueue();
 	mPlayer.handleEvent(event, commands);
 

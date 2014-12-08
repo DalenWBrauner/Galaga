@@ -43,6 +43,7 @@ void MenuState::addToMenu(sf::Vector2f viewSize, std::string text, float row) {
 }
 
 void MenuState::draw() {
+	//std::cout << "draw() MenuState" << std::endl;
 	sf::RenderWindow& window = *getContext().window;
 	window.draw(mTitleSprite);
 
@@ -52,12 +53,13 @@ void MenuState::draw() {
 }
 
 bool MenuState::update(sf::Time dt) {
-	//std::cout << "Updating MenuState" << std::endl;
+	//std::cout << "update() MenuState" << std::endl;
 	updateOptionText();
 	return true;
 }
 
 bool MenuState::handleEvent(const sf::Event& event) {
+	std::cout << "handleEvent() MenuState" << std::endl;
 
 	if (event.type != sf::Event::KeyPressed) {
 		return false;

@@ -28,6 +28,7 @@ PauseState::PauseState(StateStack& stack, Context context)
 }
 
 void PauseState::draw() {
+	//std::cout << "draw() PauseState" << std::endl;
 	sf::RenderWindow& window = *getContext().window;
 	
 	sf::RectangleShape backgroundShape;
@@ -40,19 +41,23 @@ void PauseState::draw() {
 }
 
 bool PauseState::update(sf::Time) {
-	//std::cout << "Updating PauseState" << std::endl;
+	//std::cout << "update() PauseState" << std::endl;
 	return false;
 }
 
 bool PauseState::handleEvent(const sf::Event& event) {
+	//std::cout << "handleEvent() PauseState";
 	if (event.type != sf::Event::KeyPressed) {
+		//std::cout << ":\t Not a keypress" << std::endl;
 		return false;
 	}
 
 	if (event.key.code == sf::Keyboard::Escape) {
+		//std::cout << ":\t Pressed Escape!" << std::endl;;
 		requestStackPop();
 	}
 	if (event.key.code == sf::Keyboard::BackSpace) {
+		//std::cout << ":\t Pressed Backspace!" << std::endl;;
 		requestStackClear();
 		//requestStackPush(States::Starry);
 		requestStackPush(States::Menu);

@@ -29,6 +29,7 @@ TitleState::TitleState(StateStack& stack, Context context)
 }
 
 void TitleState::draw() {
+	//std::cout << "draw() TitleState" << std::endl;
 	sf::RenderWindow& window = *getContext().window;
 	window.draw(mTitleSprite);
 
@@ -36,7 +37,7 @@ void TitleState::draw() {
 }
 
 bool TitleState::update(sf::Time dt) {
-	//std::cout << "Updating TitleState" << std::endl;
+	//std::cout << "update() TitleState" << std::endl;
 
 	mTextEffectTime += dt;
 
@@ -50,6 +51,7 @@ bool TitleState::update(sf::Time dt) {
 }
 
 bool TitleState::handleEvent(const sf::Event& event) {
+	std::cout << "handleEvent() TitleState" << std::endl;
 	// Check for Any keypress
 	if (event.type == sf::Event::KeyPressed) {
 		requestStackPop();

@@ -19,6 +19,8 @@ ScoreState::ScoreState(StateStack& stack, Context context)
 }
 
 void ScoreState::draw() {
+	//std::cout << "draw() ScoreState" << std::endl;
+
 	sf::RenderWindow& window = *getContext().window;
 
 	for (const sf::Text& text : mScores) {
@@ -29,11 +31,13 @@ void ScoreState::draw() {
 }
 
 bool ScoreState::update(sf::Time dt) {
-	//std::cout << "Updating ScoreState" << std::endl;
+	//std::cout << "update() ScoreState" << std::endl;
 	return true;
 }
 
 bool ScoreState::handleEvent(const sf::Event& event) {
+	//std::cout << "handleEvent() ScoreState" << std::endl;
+
 	// Check for any keypress
 	if (event.type == sf::Event::KeyPressed) {
 		requestStackPop();

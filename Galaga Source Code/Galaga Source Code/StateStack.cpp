@@ -17,22 +17,22 @@ State::Ptr StateStack::createState(States::ID stateID) {
 }
 
 void StateStack::draw() {
-	// Draws each state, starting from the bottom
-	for (auto itr = mStack.rbegin(); itr != mStack.rend(); ++itr) {
-		(*itr)->draw();
-	}
+	//std::cout << "-- draw() StateStack" << std::endl;
 
-//	for (unsigned i = mStack.size(); i-- > 0;) {
-//		(mStack)[i]->draw();
-//	}
+	// Draws each state, starting from the bottom
+	for (unsigned i = 0; i < mStack.size(); i++) {
+		(mStack)[i]->draw();
+	}
 }
 
 void StateStack::update(sf::Time dt) {
+	//std::cout << "-- update() StateStack" << std::endl;
+
 	// Calls update() for every state, starting from the top
 	for (auto itr = mStack.rbegin(); itr != mStack.rend(); ++itr) {
 		if (!(*itr)->update(dt)) {
 			// Quit early if a state returns false
-			return;
+			break;
 		}
 	}
 	// Only make changes to the stack after handling events
@@ -40,11 +40,13 @@ void StateStack::update(sf::Time dt) {
 }
 
 void StateStack::handleEvent(const sf::Event& event) {
+	//std::cout << "-- handleEvent() StateStack" << std::endl;
+
 	// Calls handleEvent() for every state, starting from the top
 	for (auto itr = mStack.rbegin(); itr != mStack.rend(); ++itr) {
 		if (!(*itr)->handleEvent(event)) {
 			// Quit early if a state returns false
-			return;
+			break;
 		}
 	}
 	// Only make changes to the stack after handling events
@@ -55,13 +57,19 @@ void StateStack::applyPendingChanges() {
 	for (PendingChange change : mPendingList) {
 		switch (change.action) {
 		case Push:
+			//std::cout << "applyPendingChange(): push_back...";
 			mStack.push_back(createState(change.stateID));
+			//std::cout << "done!" << std::endl;
 			break;
 		case Pop:
+			//std::cout << "applyPendingChange(): pop_back...";
 			mStack.pop_back();
+			//std::cout << "done!" << std::endl;
 			break;
 		case Clear:
+			//std::cout << "applyPendingChange(): clear...";
 			mStack.clear();
+			//std::cout << "done!" << std::endl;
 			break;
 		}
 	}
@@ -69,14 +77,17 @@ void StateStack::applyPendingChanges() {
 }
 
 void StateStack::pushState(States::ID stateID) {
+	//std::cout << "PUSHING STATE!" << std::endl;
 	mPendingList.push_back(PendingChange(Push, stateID));
 }
 
 void StateStack::popState() {
+	//std::cout << "POPPING STATE!" << std::endl;
 	mPendingList.push_back(PendingChange(Pop));
 }
 
 void StateStack::clearStates() {
+	//std::cout << "CLEARING STATE!" << std::endl;
 	mPendingList.push_back(PendingChange(Clear));
 }
 
