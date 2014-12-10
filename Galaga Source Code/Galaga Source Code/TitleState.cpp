@@ -51,7 +51,7 @@ bool TitleState::update(sf::Time dt) {
 }
 
 bool TitleState::handleEvent(const sf::Event& event) {
-	std::cout << "handleEvent() TitleState" << std::endl;
+	//std::cout << "handleEvent() TitleState" << std::endl;
 	// Check for Any keypress
 	if (event.type == sf::Event::KeyPressed) {
 		requestStackPop();

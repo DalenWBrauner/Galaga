@@ -59,7 +59,7 @@ bool MenuState::update(sf::Time dt) {
 }
 
 bool MenuState::handleEvent(const sf::Event& event) {
-	std::cout << "handleEvent() MenuState" << std::endl;
+	//std::cout << "handleEvent() MenuState" << std::endl;
 
 	if (event.type != sf::Event::KeyPressed) {
 		return false;
@@ -68,14 +68,14 @@ bool MenuState::handleEvent(const sf::Event& event) {
 	if (event.key.code == sf::Keyboard::Return) {
 		if (mOptionIndex == Quit) {
 			requestStackPop();		// Closes the game by emptying the stack
-			//requestStackPop();	// Need to clear out the Starry state
+			requestStackPop();	// Need to clear out the Starry state
 		}
 		else if (mOptionIndex == SinglePlayer) {
 			requestStackPop();
 			requestStackPush(States::Game);
 		}
 		else if (mOptionIndex == ScoreBoard) {
-			//requestStackPush(States::Starry);
+			requestStackPush(States::Starry);
 			requestStackPush(States::Scoreboard);
 		}
 		else if (mOptionIndex == LocalMultiplayer) {}

@@ -9,10 +9,15 @@ ScoreState::ScoreState(StateStack& stack, Context context)
 	, mExitText()
 	, mScores()
 {
+	sf::Vector2f viewSize = context.window->getView().getSize();
 	mExitText.setFont(context.fonts->get(Resource::Font::Galaga));
-	mExitText.setString("(Press any key to return to the Main Menu)");
+	mExitText.setString("(Press any key\nto return to the Main Menu)");
+	mExitText.setCharacterSize(15);
 	centerOrigin(mExitText);
-	mExitText.setPosition(context.window->getView().getSize() / 2.f);
+	mExitText.setPosition(sf::Vector2f(
+		viewSize.x / 2.f,
+		viewSize.y / 2.f + viewSize.y*.4f
+		));
 	mExitText.setColor(sf::Color::Red);
 
 	loadScores();
@@ -20,7 +25,6 @@ ScoreState::ScoreState(StateStack& stack, Context context)
 
 void ScoreState::draw() {
 	//std::cout << "draw() ScoreState" << std::endl;
-
 	sf::RenderWindow& window = *getContext().window;
 
 	for (const sf::Text& text : mScores) {
@@ -41,7 +45,7 @@ bool ScoreState::handleEvent(const sf::Event& event) {
 	// Check for any keypress
 	if (event.type == sf::Event::KeyPressed) {
 		requestStackPop();
-		//requestStackPop();	// Need to pop StarryState
+		requestStackPop();	// Need to pop StarryState
 	}
 	return true;
 }

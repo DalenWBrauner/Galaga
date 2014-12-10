@@ -6,7 +6,6 @@ GameState::GameState(StateStack& stack, Context context)
 	, mWorld(*context.window)
 	, mPlayer(*context.player)
 {
-
 	// These really belong in the world, not here
 	yourScore = 0;
 	highScore = 1337;	//Temporary

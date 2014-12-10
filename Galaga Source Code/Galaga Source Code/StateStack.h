@@ -3,7 +3,7 @@
 #include "State.h"
 #include "StateIDs.h"
 #include "ResourceIDs.h"
-#include "Galaga.h"
+#include "SFML\System\NonCopyable.hpp"
 #include <vector>
 #include <utility>
 #include <functional>

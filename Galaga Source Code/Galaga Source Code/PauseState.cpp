@@ -21,7 +21,7 @@ PauseState::PauseState(StateStack& stack, Context context)
 	mPausedText.setPosition(0.5f * viewSize.x, 0.4f * viewSize.y);
 
 	mInstructionText.setFont(font);
-	mInstructionText.setString("ESC\t\t\t-> Resume Game\nBackspace\t-> Return to Main Menu");
+	mInstructionText.setString("ESC\t\t\t-> Resume Game\nBackspace\t  -> Return to Main Menu");
 	mInstructionText.setCharacterSize(12);
 	centerOrigin(mInstructionText);
 	mInstructionText.setPosition(0.5f * viewSize.x, 0.6f * viewSize.y);
@@ -59,7 +59,7 @@ bool PauseState::handleEvent(const sf::Event& event) {
 	if (event.key.code == sf::Keyboard::BackSpace) {
 		//std::cout << ":\t Pressed Backspace!" << std::endl;;
 		requestStackClear();
-		//requestStackPush(States::Starry);
+		requestStackPush(States::Starry);
 		requestStackPush(States::Menu);
 	}
 	return false;

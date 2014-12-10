@@ -4,9 +4,13 @@
 #include "ResourceIDs.h"
 #include "Player.h"
 #include "StateStack.h"
+#include "World.h"
+#include "State.h"
 #include "SFML/System/Time.hpp"
 #include "SFML/Graphics/RenderWindow.hpp"
 #include "SFML/Graphics/Text.hpp"
+#include <sstream>
+#include <string>
 
 class Application {
 public:

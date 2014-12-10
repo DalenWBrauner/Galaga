@@ -1,5 +1,6 @@
 #include "StateStack.h"
 #include <iostream>
+#include <cassert>
 
 StateStack::StateStack(State::Context context)
 	: mStack()

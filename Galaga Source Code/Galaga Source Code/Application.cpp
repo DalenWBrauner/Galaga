@@ -30,7 +30,7 @@ Application::Application()
 	mStatisticsText.setCharacterSize(10u);
 
 	registerStates();
-	//mStateStack.pushState(States::Starry);	// Start the aesthetic
+	mStateStack.pushState(States::Starry);	// Start the aesthetic
 	mStateStack.pushState(States::Title);	// Let's get started!
 }
 
