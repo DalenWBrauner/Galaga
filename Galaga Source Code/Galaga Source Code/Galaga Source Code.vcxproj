@@ -169,6 +169,8 @@
     <ClCompile Include="Aircraft.cpp" />
     <ClCompile Include="MenuState.cpp" />
     <ClCompile Include="PauseState.cpp" />
+    <ClCompile Include="Projectile.cpp" />
+    <ClCompile Include="ProjectileFactory.cpp" />
     <ClCompile Include="SceneNode.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Application.cpp" />
@@ -183,6 +185,7 @@
     <ClCompile Include="World.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Category.h" />
     <ClInclude Include="DataTables.h" />
     <ClInclude Include="Command.h" />
     <ClInclude Include="CommandQueue.h" />
@@ -194,6 +197,8 @@
     <ClInclude Include="GameState.h" />
     <ClInclude Include="MenuState.h" />
     <ClInclude Include="PauseState.h" />
+    <ClInclude Include="Projectile.h" />
+    <ClInclude Include="ProjectileFactory.h" />
     <ClInclude Include="ResourceHolder.h" />
     <ClInclude Include="ResourceIDs.h" />
     <ClInclude Include="ScoreState.h" />

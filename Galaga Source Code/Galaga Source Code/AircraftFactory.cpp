@@ -1,7 +1,9 @@
 #include "AircraftFactory.h"
 
-AircraftFactory::AircraftFactory(TextureHolder *textureHolder) {
-	mTextures = textureHolder;
+AircraftFactory::AircraftFactory(TextureHolder *textureHolder)
+	: mTextures(textureHolder)
+	, mProjectileFactory(textureHolder)
+{
 	initSpriteMap();
 }
 
@@ -40,5 +42,5 @@ std::unique_ptr<Aircraft> AircraftFactory::newAircraft(Aircraft::ShipType shipTy
 	sprite.setScale(sf::Vector2f(2.f, 2.f));
 	sprite.setOrigin(8, 8);
 
-	return std::unique_ptr<Aircraft>(new Aircraft(shipType, sprite));
+	return std::unique_ptr<Aircraft>(new Aircraft(shipType, sprite, mProjectileFactory));
 }

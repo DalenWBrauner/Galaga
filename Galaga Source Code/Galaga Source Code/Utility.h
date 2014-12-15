@@ -1,5 +1,8 @@
 #ifndef Utility_h
 #define Utility_h
+#include "SFML\System\Vector2.hpp"
+#include "SFML\Graphics\Sprite.hpp"
+#include "SFML\Graphics\Text.hpp"
 
 namespace sf {
 	class Sprite;

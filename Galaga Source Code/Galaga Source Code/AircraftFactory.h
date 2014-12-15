@@ -2,6 +2,7 @@
 #define AircraftFactory_h
 #include "Aircraft.h"
 #include "ResourceHolder.h"
+#include "ProjectileFactory.h"
 
 class AircraftFactory {
 public:
@@ -13,6 +14,7 @@ private:
 
 	TextureHolder*						mTextures;
 	std::map<Aircraft::ShipType, int>	mSpriteMap;
+	ProjectileFactory					mProjectileFactory;
 };
 
 #endif

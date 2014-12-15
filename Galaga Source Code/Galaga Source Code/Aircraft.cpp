@@ -5,10 +5,10 @@
 
 namespace
 {
-	const std::vector<AircraftData> Table = initializeAircraftData();
+	const std::vector<AircraftData> Table = initAircraftData();
 }
 
-Aircraft::Aircraft(ShipType shipType, sf::Sprite sprite)
+Aircraft::Aircraft(ShipType shipType, sf::Sprite sprite, ProjectileFactory& projectileFactory)
 	: Entity()
 	, mShipType(shipType)
 	, mSprite(sprite)
@@ -33,9 +33,9 @@ Aircraft::Aircraft(ShipType shipType, sf::Sprite sprite)
 	centerOrigin(mSprite);
 
 	mFireCommand.category = Category::Scene;
-	mFireCommand.action = [this](SceneNode& node, sf::Time){
+	mFireCommand.action = [this, &projectileFactory](SceneNode& node, sf::Time){
 		//createBullets(node, textures);
-		createProjectile(node);
+		createProjectile(node, projectileFactory);
 	};
 
 	// This should simplify the constructor a bit
@@ -234,12 +234,12 @@ void Aircraft::createBullets(SceneNode& node, const TextureHolder& textures) con
 */
 
 // Now a fusion of createBullet and createProjectile
-void Aircraft::createProjectile(SceneNode& node) const {
+void Aircraft::createProjectile(SceneNode& node, ProjectileFactory& projectileFactory) const {
 	Projectile::Type type = isAllied() ? Projectile::AlliedBullet : Projectile::EnemyBullet;
 	float xOffset = 0.0f;
 	float yOffset = 0.5f;
 
-	std::unique_ptr<Projectile> projectile(new Projectile(type, textures));
+	std::unique_ptr<Projectile> projectile(projectileFactory.newProjectile(type));
 
 	sf::Vector2f offset(xOffset * mSprite.getGlobalBounds().width, yOffset * mSprite.getGlobalBounds().height);
 	sf::Vector2f velocity(0, projectile->getMaxSpeed());

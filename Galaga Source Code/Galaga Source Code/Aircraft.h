@@ -3,7 +3,7 @@
 #include "Entity.h"
 #include "Command.h"
 #include "ResourceIDs.h"
-#include "Projectile.h"
+#include "ProjectileFactory.h"
 #include "TextNode.h"
 #include "ResourceHolder.h"
 #include "SFML\Graphics\Sprite.hpp"
@@ -13,7 +13,7 @@
 class Aircraft : public Entity {
 public:
 	// ShipType determines behavior.
-	enum			ShipType {
+	enum					ShipType {
 		// ShipTypes with unique behaviors.
 		PlayerShip,
 		// Standard enemy ships; described based upon appearance.
@@ -32,7 +32,7 @@ public:
 		// So we have the length of our enum
 		TypeCount,
 	};
-	explicit				Aircraft(ShipType shipType, sf::Sprite sprite);
+	explicit				Aircraft(ShipType shipType, sf::Sprite sprite, ProjectileFactory& projectileFactory);
 	virtual unsigned int	getCategory() const;
 	virtual sf::FloatRect	getBoundingRect() const;
 	bool					isAllied() const;
@@ -54,7 +54,7 @@ private:
 	void			checkProjectileLaunch(sf::Time dt, CommandQueue& commands);
 
 	//void			createBullets(SceneNode& node, const TextureHolder& textures) const;
-	void			createProjectile(SceneNode& node) const;
+	void			createProjectile(SceneNode& node, ProjectileFactory& projectileFactory) const;
 	//void			createPickup(SceneNode& node, const TextureHolder& textures) const;
 
 	//void			updateTexts();
