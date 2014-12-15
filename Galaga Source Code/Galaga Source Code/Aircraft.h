@@ -1,7 +1,12 @@
 #ifndef Aircraft_h
 #define Aircraft_h
 #include "Entity.h"
+#include "Command.h"
+#include "ResourceIDs.h"
+#include "Projectile.h"
+#include "TextNode.h"
 #include "ResourceHolder.h"
+#include "SFML\Graphics\Sprite.hpp"
 #include <memory>
 #include <map>
 
@@ -23,14 +28,59 @@ public:
 		Greenie,	 // Line 9
 		Dragonfly,	 // Line 10
 		Enterprise,	 // Line 11
-		Petalcopter, // Line 12	
+		Petalcopter, // Line 12
+		// So we have the length of our enum
+		TypeCount,
 	};
-	explicit		Aircraft(ShipType shipType, sf::Sprite sprite);
-	virtual void	drawCurrent(sf::RenderTarget& target, sf::RenderStates states) const;
+	explicit				Aircraft(ShipType shipType, sf::Sprite sprite);
+	virtual unsigned int	getCategory() const;
+	virtual sf::FloatRect	getBoundingRect() const;
+	bool					isAllied() const;
+	bool					isMarkedForRemoval() const;
+	float					getMaxSpeed() const;
+
+	//void					increaseFireRate();
+	//void					increaseSpread();
+	//void					collectMissiles(unsigned int count);
+
+	void					fire();
+	//void					launchMissile();
 
 private:
+	virtual void	drawCurrent(sf::RenderTarget& target, sf::RenderStates states) const;
+	virtual void	updateCurrent(sf::Time dt, CommandQueue& commands);
+	void			updateMovementPattern(sf::Time dt);
+	//void			checkPickupDrop(CommandQueue& commands);
+	void			checkProjectileLaunch(sf::Time dt, CommandQueue& commands);
+
+	//void			createBullets(SceneNode& node, const TextureHolder& textures) const;
+	void			createProjectile(SceneNode& node) const;
+	//void			createPickup(SceneNode& node, const TextureHolder& textures) const;
+
+	//void			updateTexts();
+
 	ShipType			mShipType;
 	sf::Sprite			mSprite;
+	Command				mFireCommand;
+	//Command				mMissileCommand;
+	//sf::Time			mFireCountdown;
+	bool				mIsFiring;
+	//bool				mIsLaunchingMissile;
+	bool				mIsMarkedForRemoval;
+
+	//int					mFireRateLevel;
+	//int					mSpreadLevel;
+	//int					mMissileAmmo;
+	int					mPointValue; // Galaga Addition
+
+	//Command				mDropPickupCommand;
+	float				mTravelledDistance;
+	std::size_t			mDirectionIndex;
+	//TextNode*			mHealthDisplay;
+	//TextNode*			mMissileDisplay;
+
+	// NOTE: I need to build-in a Projectile Factory
+	// possibly one static for all aircraft?
 };
 
 #endif
