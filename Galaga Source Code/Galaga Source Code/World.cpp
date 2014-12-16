@@ -60,17 +60,24 @@ void World::buildScene() {
 	mPlayerAircraft->setVelocity(0.f, 0.f);
 	mSceneLayers[Air]->attachChild(std::move(leader));
 
-	/* Let's add some escorts!
-	std::unique_ptr<Aircraft> leftEscort(
-		mAircraftFactory.newAircraft(Aircraft::Wasp));
-	leftEscort->setPosition(-80.f, 50.f);
-	mPlayerAircraft->attachChild(std::move(leftEscort));
+	spawnEnemies();
+}
 
-	std::unique_ptr<Aircraft> rightEscort(
-		mAircraftFactory.newAircraft(Aircraft::Enterprise));
-	rightEscort->setPosition(80.f, 50.f);
-	mPlayerAircraft->attachChild(std::move(rightEscort));
-	*/
+void World::spawnEnemies() {
+	spawnEnemy(Aircraft::Scorpion,	 mWorldBounds.width / 2 - 100,	30.f, 0.f, 0.f);
+	spawnEnemy(Aircraft::Wasp,		 mWorldBounds.width / 2 - 50,	50.f, 0.f, 0.f);
+	spawnEnemy(Aircraft::Enterprise, mWorldBounds.width / 2,		00.f, 0.f, 0.f);
+	spawnEnemy(Aircraft::Petalcopter,mWorldBounds.width / 2,		80.f, 0.f, 0.f);
+	spawnEnemy(Aircraft::Greenie,	 mWorldBounds.width / 2 + 50,	50.f, 0.f, 0.f);
+	spawnEnemy(Aircraft::Pudding,	 mWorldBounds.width / 2 + 100,	30.f, 0.f, 0.f);
+}
+
+void World::spawnEnemy(Aircraft::ShipType type, float xPos, float yPos, float xVel, float yVel) {
+	std::unique_ptr<Aircraft> enemy(
+		mAircraftFactory.newAircraft(type));
+	enemy->setPosition(xPos, yPos);
+	enemy->setVelocity(xVel, yVel);
+	mSceneLayers[Air]->attachChild(std::move(enemy));
 }
 
 CommandQueue& World::getCommandQueue() {
@@ -89,7 +96,7 @@ void World::update(sf::Time dt) {
 	}
 
 	invisibleWall();
-	mSceneGraph.update(dt);
+	mSceneGraph.update(dt, mCommandQueue);
 }
 
 void World::invisibleWall() {

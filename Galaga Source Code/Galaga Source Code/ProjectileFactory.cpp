@@ -1,4 +1,5 @@
 #include "ProjectileFactory.h"
+#include <iostream>
 
 ProjectileFactory::ProjectileFactory(TextureHolder *textureHolder) {
 	mTextures = textureHolder;
@@ -15,6 +16,7 @@ void ProjectileFactory::initSpriteMap(){
 
 std::unique_ptr<Projectile> ProjectileFactory::newProjectile(Projectile::Type type) {
 	/* Instantiates and returns a unique pointer to a new Projectile object */
+	std::cout << "ProjectileFactory shipping out projectile..." << std::endl;
 
 	// Determines the sprite based on the type
 	sf::Sprite sprite;

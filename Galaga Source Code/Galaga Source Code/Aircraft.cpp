@@ -2,6 +2,7 @@
 #include "CommandQueue.h"
 #include "DataTables.h"
 #include "Utility.h"
+#include <iostream>
 
 namespace
 {
@@ -14,11 +15,11 @@ Aircraft::Aircraft(ShipType shipType, sf::Sprite sprite, ProjectileFactory& proj
 	, mSprite(sprite)
 	, mFireCommand()
 	//, mMissileCommand()
-	//, mFireCountdown(sf::Time::Zero)
+	, mFireCountdown(sf::Time::Zero)
 	, mIsFiring(false)
 	//, mIsLaunchingMissile(false)
 	, mIsMarkedForRemoval(false)
-	//, mFireRateLevel(1)
+	, mFireRateLevel(1)
 	//, mSpreadLevel(1)
 	//, mMissileAmmo(2)
 	//, mDropPickupCommand()
@@ -27,8 +28,8 @@ Aircraft::Aircraft(ShipType shipType, sf::Sprite sprite, ProjectileFactory& proj
 	//, mHealthDisplay(nullptr)
 	//, mMissileDisplay(nullptr)
 {
-	if (mShipType == Aircraft::PlayerShip)	{ mCategory = Category::PlayerAircraft; }
-	else									{ mCategory = Category::EnemyAircraft; }
+	if (mShipType == Aircraft::PlayerShip)	{ mDefaultCategory = Category::PlayerAircraft; }
+	else									{ mDefaultCategory = Category::EnemyAircraft; }
 
 	centerOrigin(mSprite);
 
@@ -68,6 +69,8 @@ void Aircraft::drawCurrent(sf::RenderTarget& target, sf::RenderStates states) co
 }
 
 void Aircraft::updateCurrent(sf::Time dt, CommandQueue& commands) {
+	//std::cout << "updating current aircraft..." << std::endl;
+
 	//Entity has been destroyed; Possibly drop pickup, mark for removal
 	if (isDestroyed()) {
 		//checkPickupDrop(commands);
@@ -126,6 +129,7 @@ void Aircraft::increaseSpread() {
 void Aircraft::collectMissiles(unsigned int count) {
 	mMissileAmmo += count;
 }
+*/
 
 void Aircraft::fire() {
 	// Only ships with fire interval != 0 are able to fire
@@ -134,6 +138,7 @@ void Aircraft::fire() {
 	}
 }
 
+/*
 void Aircraft::launchMissile() {
 	if (mMissileAmmo > 0) {
 		mIsLaunchingMissile = true;
@@ -173,37 +178,32 @@ void Aircraft::checkPickupDrop(CommandQueue& commands) {
 */
 
 void Aircraft::checkProjectileLaunch(sf::Time dt, CommandQueue& commands) {
+	//std::cout << "Checking projectile launch..." << std::endl;
+
 	// This will need to be rewritten completely
 	// Enemies will fire when the world orders them to (based on timer + randomness?)
 	// Players will fire iff there are less than 2 projectiles already + they are holding down the button
 
-	// Enemies are never trying to fire (for now)
 	if (!isAllied()) {
-		//fire();
-		return;
+		fire();
 	}
 
-	// Players are always trying to fire when the button is held down
-	if (mIsFiring) {
-		commands.push(mFireCommand);
-		mIsFiring = false;
-	}
-
-	// No timer, no missiles
-	/*
-	// Check for automatic gunfire, allow only in intervals
+	// If they're trying to fire and can:
 	if (mIsFiring && mFireCountdown <= sf::Time::Zero) {
-		// Interval expired: we can fire a new bullet
+		// Interval expired: we can fire a new bullet!
+		std::cout << "Guns ready: FIRE!" << std::endl;
 		commands.push(mFireCommand);
 		mFireCountdown += Table[mShipType].fireInterval / (mFireRateLevel + 1.f);
 		mIsFiring = false;
 	}
+	// If it's not time for them to fire yet:
 	else if (mFireCountdown > sf::Time::Zero) {
 		// Interval not expired: Decrease it further
 		mFireCountdown -= dt;
 		mIsFiring = false;
 	}
 	
+	/*
 	// Check for missile launch
 	if (mIsLaunchingMissile) {
 		commands.push(mMissileCommand);
@@ -235,6 +235,7 @@ void Aircraft::createBullets(SceneNode& node, const TextureHolder& textures) con
 
 // Now a fusion of createBullet and createProjectile
 void Aircraft::createProjectile(SceneNode& node, ProjectileFactory& projectileFactory) const {
+	std::cout << "Creating projectile..." << std::endl;
 	Projectile::Type type = isAllied() ? Projectile::AlliedBullet : Projectile::EnemyBullet;
 	float xOffset = 0.0f;
 	float yOffset = 0.5f;

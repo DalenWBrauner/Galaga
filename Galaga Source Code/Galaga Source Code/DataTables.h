@@ -22,7 +22,7 @@ struct AircraftData {
 	// Not Galaga
 	//int								hitpoints;
 	//Resource::Texture				texture;
-	//sf::Time						fireInterval;
+	sf::Time						fireInterval;
 	float							speed;
 	std::vector<Direction>			directions;
 	

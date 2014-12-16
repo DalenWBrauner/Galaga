@@ -3,8 +3,9 @@
 #include "ResourceHolder.h"
 #include "ResourceIDs.h"
 #include "SceneNode.h"
-#include "SFML\Graphics\Text.hpp"
-#include "SFML\Graphics\Font.hpp"
+#include <SFML\Graphics\Text.hpp>
+#include <SFML\Graphics\Font.hpp>
+#include <SFML\Graphics\RenderTarget.hpp>
 
 class TextNode : public SceneNode {
 public:

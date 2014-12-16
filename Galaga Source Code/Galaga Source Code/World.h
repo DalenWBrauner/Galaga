@@ -25,6 +25,8 @@ private:
 	void				loadSounds();
 	void				prepareSpriteMap();
 	void				buildScene();
+	void				spawnEnemies();
+	void				spawnEnemy(Aircraft::ShipType type, float xPos, float yPos, float xVel, float yVel);
 	void				invisibleWall();
 
 	enum Layer {

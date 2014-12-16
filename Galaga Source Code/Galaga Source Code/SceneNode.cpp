@@ -1,29 +1,32 @@
 #include "SceneNode.h"
+#include "Command.h"
+#include <SFML/Graphics/RectangleShape.hpp>
+#include <SFML/Graphics/RenderTarget.hpp>
 
 // SceneNode Definitions
-SceneNode::SceneNode() {
-	mCategory = Category::Type::Scene;
+SceneNode::SceneNode(Category::Type category)
+	: mChildren()
+	, mParent(nullptr)
+	, mDefaultCategory(category)
+{}
+
+void SceneNode::update(sf::Time dt, CommandQueue& commands) {
+	updateCurrent(dt, commands);
+	updateChildren(dt, commands);
 }
 
-void SceneNode::update(sf::Time dt) {
-	//std::cout << "SceneNode.update("<< dt.asSeconds << ")" << std::endl;
-	updateCurrent(dt);
-	updateChildren(dt);
+void SceneNode::updateCurrent(sf::Time dt, CommandQueue& commands) {
+	// Nothing by default
 }
 
-void SceneNode::updateCurrent(sf::Time dt) {
-	//std::cout << "SceneNode.updateCurrent(" << dt.asSeconds << ")" << std::endl;
-}
-
-void SceneNode::updateChildren(sf::Time dt) {
-	//std::cout << "SceneNode.updateChildren(" << dt.asSeconds << ")" << std::endl;
+void SceneNode::updateChildren(sf::Time dt, CommandQueue& commands) {
 	for (const Ptr& child : mChildren) {
-		child->update(dt);
+		child->update(dt, commands);
 	}
 }
 
 unsigned int SceneNode::getCategory() const {
-	return mCategory;
+	return mDefaultCategory;
 }
 
 void SceneNode::onCommand(const Command& command, sf::Time dt) {
@@ -37,32 +40,44 @@ void SceneNode::onCommand(const Command& command, sf::Time dt) {
 }
 
 void SceneNode::draw(sf::RenderTarget& target, sf::RenderStates states) const {
-	//std::cout << "SceneNode.draw()" << std::endl;
 
-	// Draw self
 	states.transform *= getTransform();
 	drawCurrent(target, states);
+	drawChildren(target, states);
 
-	// Draw children
+	// DEBUG: Draw bounding rectangle
+	//drawBoundingRect(target, states);
+}
+
+void SceneNode::drawCurrent(sf::RenderTarget& target, sf::RenderStates states) const {
+	// Do nothing
+}
+
+void SceneNode::drawChildren(sf::RenderTarget& target, sf::RenderStates states) const {
 	for (const Ptr& child : mChildren) {
 		child->draw(target, states);
 	}
 }
 
-void SceneNode::drawCurrent(sf::RenderTarget& target, sf::RenderStates states) const {
-	//std::cout << "SceneNode.draw()" << std::endl;
+void SceneNode::drawBoundingRect(sf::RenderTarget& target, sf::RenderStates) const {
+	sf::FloatRect rect = getBoundingRect();
+
+	sf::RectangleShape shape;
+	shape.setPosition(sf::Vector2f(rect.left, rect.top));
+	shape.setSize(sf::Vector2f(rect.width, rect.height));
+	shape.setFillColor(sf::Color::Transparent);
+	shape.setOutlineColor(sf::Color::Green);
+	shape.setOutlineThickness(1.f);
+
+	target.draw(shape);
 }
 
 void SceneNode::attachChild(Ptr child) {
-	// Attaches the provided child
-	//std::cout << "SceneNode.attachChild()" << std::endl;
 	child->mParent = this;
 	mChildren.push_back(std::move(child));
 }
 
 SceneNode::Ptr SceneNode::detachChild(const SceneNode& node) {
-	// Detaches the provided child
-	//std::cout << "start: SceneNode.detachChild()" << std::endl;
 
 	// Find the node
 	auto found = std::find_if(mChildren.begin(), mChildren.end(),
@@ -79,7 +94,6 @@ SceneNode::Ptr SceneNode::detachChild(const SceneNode& node) {
 }
 
 sf::Transform SceneNode::getWorldTransform() const {
-	//std::cout << "start: SceneNode.getWorldTransform()" << std::endl;
 	sf::Transform transform = sf::Transform::Identity;
 
 	for (const SceneNode* node = this; node != nullptr; node = node->mParent) {
@@ -89,6 +103,17 @@ sf::Transform SceneNode::getWorldTransform() const {
 }
 
 sf::Vector2f SceneNode::getWorldPosition() const {
-	//std::cout << "start: SceneNode.getWorldPosition()" << std::endl;
 	return getWorldTransform() * sf::Vector2f();
+}
+
+sf::FloatRect SceneNode::getBoundingRect() const {
+	return sf::FloatRect();
+}
+
+bool SceneNode::isMarkedForRemoval() const {
+	return isDestroyed();
+}
+
+bool SceneNode::isDestroyed() const {
+	return false;
 }

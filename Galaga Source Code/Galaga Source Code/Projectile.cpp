@@ -6,6 +6,7 @@
 #include "SFML\Graphics\RenderStates.hpp"
 #include <cmath>
 #include <cassert>
+#include <iostream>
 
 /*
 namespace {
@@ -21,6 +22,7 @@ Projectile::Projectile(Type type, sf::Sprite sprite)
 	, mTargetDirection()
 {
 	centerOrigin(mSprite);
+	std::cout << "Projectile created!" << std::endl;
 }
 
 /*
@@ -48,6 +50,10 @@ void Projectile::updateCurrent(sf::Time dt, CommandQueue& commands) {
 		setVelocity(newVelocity);
 	}
 	*/
+
+	sf::FloatRect info = mSprite.getGlobalBounds();
+	std::cout << "Top of the projectile: " << info.top << std::endl;
+	std::cout << "Left of the projectile: " << info.left << std::endl;
 	Entity::updateCurrent(dt, commands);
 }
 

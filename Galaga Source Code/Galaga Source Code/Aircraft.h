@@ -6,7 +6,8 @@
 #include "ProjectileFactory.h"
 #include "TextNode.h"
 #include "ResourceHolder.h"
-#include "SFML\Graphics\Sprite.hpp"
+#include <SFML\Graphics\Sprite.hpp>
+#include <SFML\Graphics\RenderTarget.hpp>
 #include <memory>
 #include <map>
 
@@ -63,12 +64,12 @@ private:
 	sf::Sprite			mSprite;
 	Command				mFireCommand;
 	//Command				mMissileCommand;
-	//sf::Time			mFireCountdown;
+	sf::Time			mFireCountdown;
 	bool				mIsFiring;
 	//bool				mIsLaunchingMissile;
 	bool				mIsMarkedForRemoval;
 
-	//int					mFireRateLevel;
+	int					mFireRateLevel;
 	//int					mSpreadLevel;
 	//int					mMissileAmmo;
 	int					mPointValue; // Galaga Addition

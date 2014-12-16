@@ -2,6 +2,7 @@
 #define Player_h
 #include "CommandQueue.h"
 #include "EntityMover.h"
+#include <SFML\Window\Event.hpp>
 
 class Player {
 public:

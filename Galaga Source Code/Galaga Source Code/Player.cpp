@@ -1,4 +1,5 @@
 #include "Player.h"
+#include "Aircraft.h"
 
 // Templating allows derivedAction(Function) on any given Function for any GameObjectType
 template <typename GameObjectType, typename Function>
@@ -26,40 +27,50 @@ void Player::handleEvent(const sf::Event& event, CommandQueue& commands) {
 
 	if (event.key.code == sf::Keyboard::P) {
 		if (event.type == sf::Event::KeyPressed) {
-			std::cout << "You pressed P!" << std::endl;
-
-			Command output;
-			output.category = Category::PlayerAircraft;
-			output.action = [](SceneNode& s, sf::Time dt) {
-				std::cout << s.getPosition().x << "," << s.getPosition().y << std::endl;
-			};
-			commands.push(output);
+			std::cout << "You pressed P!\t";
 		}
 		else if (event.type == sf::Event::KeyReleased) {
-			std::cout << "You released P!" << std::endl;
-
-			Command output;
-			output.category = Category::PlayerAircraft;
-			output.action = [](SceneNode& s, sf::Time dt) {
-				std::cout << s.getPosition().x << "," << s.getPosition().y << std::endl;
-			};
-			commands.push(output);
+			std::cout << "You released P!\t";
 		}
+		Command output;
+		output.category = Category::PlayerAircraft;
+		output.action = [](SceneNode& s, sf::Time dt) {
+			std::cout << s.getPosition().x << "," << s.getPosition().y << std::endl;
+		};
+		commands.push(output);
+	}
+
+	if (event.key.code == sf::Keyboard::Space && event.type == sf::Event::KeyPressed) {
+		std::cout << "You pressed Space; Fire!" << std::endl;
+		Command output;
+		output.category = Category::PlayerAircraft;
+		output.action = [](SceneNode& s, sf::Time dt) {
+			derivedAction<Aircraft>([](Aircraft& a, sf::Time){ a.fire(); });
+		};
+		commands.push(output);
 	}
 	
 	// Attempt 4
 	if (event.key.code == sf::Keyboard::Left) {
-		if (event.type == sf::Event::KeyPressed)
+		if (event.type == sf::Event::KeyPressed) {
+			std::cout << "Pressing left..." << std::endl;
 			pressingLeft = true;
-		else if (event.type == sf::Event::KeyReleased)
+		}
+		else if (event.type == sf::Event::KeyReleased) {
+			std::cout << "Left released." << std::endl;
 			pressingLeft = false;
+		}
 	}
 
 	if (event.key.code == sf::Keyboard::Right) {
-		if (event.type == sf::Event::KeyPressed)
+		if (event.type == sf::Event::KeyPressed) {
+			std::cout << "Pressing right..." << std::endl;
 			pressingRight = true;
-		else if (event.type == sf::Event::KeyReleased)
+		}
+		else if (event.type == sf::Event::KeyReleased) {
+			std::cout << "Right released." << std::endl;
 			pressingRight = false;
+		}
 	}
 	float x_velocity = 0.f;
 	if (pressingLeft) { x_velocity -= PlayerSpeed; }
